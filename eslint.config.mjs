@@ -10,12 +10,13 @@ export default defineConfig([
       globals: globals.node,
     },
     rules: {
-      semi: ['error', 'always'],              // obriga ponto e vírgula
-      quotes: ['error', 'single'],            // obriga aspas simples
-      indent: ['error', 2],                   // indentação com 2 espaços
-      'no-unused-vars': 'warn',               // avisa variáveis não usadas
+      'class-methods-use-this': 'off',
+      semi: ['error', 'always'],
+      quotes: ['error', 'single'],
+      indent: ['error', 2],
+      'no-unused-vars': 'warn',
       'no-multiple-empty-lines': ['warn', { max: 1 }],
-      'comma-dangle': ['error', 'always-multiline'], // vírgula no final em objetos/arrays multilinha
+      'comma-dangle': ['error', 'always-multiline'],
     },
     extends: ['js/recommended'],
   },
