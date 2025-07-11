@@ -1,0 +1,32 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PauloRobertt/project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PauloRobertt/project/issues"
+  },
+  "homepage": "https://github.com/PauloRobertt/project#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "eslint": "^9.30.1",
+    "globals": "^16.3.0",
+    "nodemon": "^3.1.10",
+    "sucrase": "^3.35.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
