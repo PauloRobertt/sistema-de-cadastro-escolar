@@ -1,12 +1,9 @@
 import express from 'express';
 
+import HomeController from '../controllers/HomeController.js';
+
 const router = express.Router();
 
-console.log('Route sendo executado!');
-
-router.get('/', (req, res) => {
-  console.log('/ sendo executado!');
-  res.send('Página Home');
-});
+router.get('/', HomeController.index);
 
 export default router;
