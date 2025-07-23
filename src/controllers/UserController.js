@@ -3,7 +3,7 @@ import User from '../models/User.js';
 class UserController {
   async index(req, res) {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({ attributes: ['id', 'nome', 'email'] });
       res.status(200).json(users);
     } catch (e) {
       res.status(400).json({
@@ -22,13 +22,15 @@ class UserController {
 
       const user = await User.findByPk(req.params.id);
 
+      const { id, nome, email } = user;
+
       if (!user) {
         return res.status(400).json({
           errors: ['Usuario não encontrado!'],
         });
       }
 
-      res.status(200).json(user);
+      res.status(200).json({ id, nome, email });
     } catch (e) {
       res.status(400).json({
         errors: e.errors.map((erros) => { return erros.message; }),
@@ -49,13 +51,13 @@ class UserController {
 
   async update(req, res) {
     try {
-      if (!req.params.id) {
+      if (!req.userID) {
         return res.status(400).json({
           errors: ['ID não enviado!'],
         });
       }
 
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userID);
 
       if (!user) {
         return res.status(400).json({
@@ -74,21 +76,19 @@ class UserController {
 
   async delete(req, res) {
     try {
-      if (!req.params.id) {
+      if (!req.userID) {
         return res.status(400).json({
           errors: ['ID não enviado!'],
         });
       }
 
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findByPk(req.userID);
 
       if (!user) {
         return res.status(400).json({
           errors: ['Usuario não encontrado!'],
         });
       }
-
-      if (!user) throw new Error('Usuario não existe');
 
       await user.destroy();
       res.json(user);
