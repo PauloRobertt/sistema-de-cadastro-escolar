@@ -5,8 +5,10 @@ import loginRequired from '../middlewares/loginRequired.js';
 
 const router = express.Router();
 
+/*
 router.get('/', loginRequired, UserController.index);
 router.get('/:id', UserController.show);
+*/
 
 router.post('/', UserController.store);
 router.put('/', loginRequired, UserController.update);
