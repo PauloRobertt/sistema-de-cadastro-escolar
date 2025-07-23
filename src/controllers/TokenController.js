@@ -8,20 +8,20 @@ class TokenController {
 
       if (!emailBody || !passwordBody) {
         return res.status(400).json({
-          errors: ['Credenciais invalidas!'],
+          errors: ['Credenciais invalidas!', '1'],
         });
       }
 
       const user = await User.findOne({ where: { email: emailBody } });
       if (!user) {
         return res.status(401).json({
-          errors: ['Usuario não encontrado!'],
+          errors: ['Credenciais invalidas!', '2'],
         });
       }
 
       if (!(await user.passwordIsValid(passwordBody))) {
         return res.status(401).json({
-          errors: ['Senha Invalida! '],
+          errors: ['Credenciais invalidas!', '3'],
         });
       }
 
