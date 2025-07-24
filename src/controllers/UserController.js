@@ -22,13 +22,13 @@ class UserController {
 
       const user = await User.findByPk(req.params.id);
 
-      const { id, nome, email } = user;
-
       if (!user) {
         return res.status(400).json({
           errors: ['Usuario não encontrado!'],
         });
       }
+
+      const { id, nome, email } = user;
 
       res.status(200).json({ id, nome, email });
     } catch (e) {
