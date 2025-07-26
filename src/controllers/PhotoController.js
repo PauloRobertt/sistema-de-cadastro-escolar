@@ -13,13 +13,19 @@ class PhotoController {
         });
       }
 
-      const { filename, originalname } = req.file;
+      try {
+        const { filename, originalname } = req.file;
 
-      const { aluno_id } = req.body;
+        const { aluno_id } = req.body;
 
-      const photo = await Photo.create({ originalname, filename, aluno_id });
+        const photo = await Photo.create({ originalname, filename, aluno_id });
 
-      return res.json(photo);
+        return res.json(photo);
+      } catch (error) {
+        return res.status(400).json({
+          errors: ['Aluno não existe'],
+        });
+      }
     });
   }
 }
