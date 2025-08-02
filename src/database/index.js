@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import databaseConfig from '../config/database.cjs';
+import databaseConfig from '../config/database.js';
 import Aluno from '../models/Aluno.js';
 import User from '../models/User.js';
 import Photo from '../models/Photo.js';
