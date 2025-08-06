@@ -1,10 +1,10 @@
-import Sequelize, { Model } from 'sequelize';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _sequelize = require('sequelize'); var _sequelize2 = _interopRequireDefault(_sequelize);
 
-export default class Aluno extends Model {
+ class Aluno extends _sequelize.Model {
   static init(sequelize) {
     super.init({
       nome: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
         validate: {
           notEmpty: {
@@ -18,7 +18,7 @@ export default class Aluno extends Model {
       },
 
       sobrenome: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
         validate: {
           notEmpty: {
@@ -32,7 +32,7 @@ export default class Aluno extends Model {
       },
 
       email: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
         unique: {
           msg: 'E-mail já em uso!',
@@ -45,7 +45,7 @@ export default class Aluno extends Model {
       },
 
       idade: {
-        type: Sequelize.INTEGER,
+        type: _sequelize2.default.INTEGER,
         defaultValue: '',
         validate: {
           isInt: {
@@ -55,7 +55,7 @@ export default class Aluno extends Model {
       },
 
       foto: {
-        type: Sequelize.STRING,
+        type: _sequelize2.default.STRING,
         defaultValue: '',
       },
 
@@ -69,4 +69,4 @@ export default class Aluno extends Model {
   static associate(models) {
     this.hasMany(models.Photo, { foreignKey: 'aluno_id' });
   }
-}
+} exports.default = Aluno;

@@ -1,13 +1,13 @@
-import Aluno from '../models/Aluno.js';
-import Photo from '../models/Photo.js';
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _Alunojs = require('../models/Aluno.js'); var _Alunojs2 = _interopRequireDefault(_Alunojs);
+var _Photojs = require('../models/Photo.js'); var _Photojs2 = _interopRequireDefault(_Photojs);
 class AlunoController {
   async index(req, res) {
     try {
-      const alunos = await Aluno.findAll({
+      const alunos = await _Alunojs2.default.findAll({
         attributes: ['id', 'nome', 'sobrenome', 'email', 'idade'],
-        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+        order: [['id', 'DESC'], [_Photojs2.default, 'id', 'DESC']],
         include: [{
-          model: Photo,
+          model: _Photojs2.default,
           attributes: ['url', 'filename'],
         }],
       });
@@ -30,11 +30,11 @@ class AlunoController {
         });
       }
 
-      const aluno = await Aluno.findByPk(req.params.id, {
+      const aluno = await _Alunojs2.default.findByPk(req.params.id, {
         attributes: ['id', 'nome', 'sobrenome', 'email', 'idade'],
-        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+        order: [['id', 'DESC'], [_Photojs2.default, 'id', 'DESC']],
         include: [{
-          model: Photo,
+          model: _Photojs2.default,
           attributes: ['url', 'filename'],
         }],
       });
@@ -55,7 +55,7 @@ class AlunoController {
 
   async store(req, res) {
     try {
-      const novoAluno = await Aluno.create(req.body);
+      const novoAluno = await _Alunojs2.default.create(req.body);
       res.status(200).json(novoAluno);
     } catch (e) {
       res.status(400).json({
@@ -72,7 +72,7 @@ class AlunoController {
         });
       }
 
-      const aluno = await Aluno.findByPk(req.params.id);
+      const aluno = await _Alunojs2.default.findByPk(req.params.id);
 
       if (!aluno) {
         return res.status(400).json({
@@ -97,7 +97,7 @@ class AlunoController {
         });
       }
 
-      const aluno = await Aluno.findByPk(req.params.id);
+      const aluno = await _Alunojs2.default.findByPk(req.params.id);
 
       if (!aluno) {
         return res.status(400).json({
@@ -115,4 +115,4 @@ class AlunoController {
   }
 }
 
-export default new AlunoController();
+exports. default = new AlunoController();

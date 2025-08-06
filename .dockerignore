@@ -1,0 +1,8 @@
+node_modules/
+src/
+.git/
+.gitignore
+README.md
+LICENSE
+nodemon.json
+eslint.config.mjs
