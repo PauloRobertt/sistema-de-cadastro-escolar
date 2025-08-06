@@ -13,9 +13,12 @@ class AlunoController {
       });
       res.status(200).json(alunos);
     } catch (e) {
+      console.log(e);
+      /*
       res.status(400).json({
         errors: e.errors.map((erros) => { return erros.message; }),
       });
+      */
     }
   }
 
