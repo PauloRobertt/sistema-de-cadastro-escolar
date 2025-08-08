@@ -1,4 +1,6 @@
 import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
 
 import homeRoutes from './routes/homeRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -8,6 +10,20 @@ import photoRoutes from './routes/photoRoutes.js';
 
 import './database/index.js';
 
+const whiteList = [
+  'http://localhost:3000',
+];
+
+var corsOptions = {
+  origin: function (origin, cb) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      cb(null, true);
+    } else {
+      cb(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 class App {
   constructor() {
     this.app = express();
@@ -16,6 +32,8 @@ class App {
   }
 
   middlewares() {
+    this.app.use(cors(corsOptions));
+    this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.static('../uploads'));
