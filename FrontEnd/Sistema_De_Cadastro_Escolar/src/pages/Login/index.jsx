@@ -1,0 +1,43 @@
+import {
+  Background,
+  LoginWrapper,
+  LoginFormWrapper,
+  LoginContent,
+  LoginImage,
+} from './styled';
+import Input from '../../components/Input/input';
+import SubmitButton from '../../components/SubmitButton';
+
+export default function index() {
+  return (
+    <Background>
+      <LoginWrapper>
+        <LoginContent>
+          <LoginFormWrapper>
+            <h1>Bem-Vindo</h1>
+            <h3>Digite seu e-mail e senha para acessar sua conta.</h3>
+            <form action="" method="post">
+              <Input
+                label="E-mail"
+                type="email"
+                placeholder="Digite seu e-mail"
+                minLength={3}
+                maxLength={100}
+              />
+              <Input
+                label="Senha"
+                type="password"
+                placeholder="Digite sua senha"
+                minLength={6}
+                maxLength={50}
+              />
+              <p>Esqueceu sua senha?</p>
+              <SubmitButton />
+            </form>
+          </LoginFormWrapper>
+        </LoginContent>
+        <LoginImage />
+      </LoginWrapper>
+    </Background>
+  );
+}
