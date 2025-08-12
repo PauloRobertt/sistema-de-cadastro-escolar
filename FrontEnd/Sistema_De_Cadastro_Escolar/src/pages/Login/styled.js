@@ -14,9 +14,9 @@ export const Background = styled.div`
 export const LoginWrapper = styled.div`
   width: 85%;
   height: 85%;
-  background-color: ${primaryColor};
+  background-color: #fff;
   border-radius: 1em;
-  border: 1em solid #ffff;
+  border: 0.5em solid #ffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,4 +61,6 @@ export const LoginImage = styled.div`
   background-repeat: no-repeat;
   width: 50%;
   height: 100%;
+  background-color: ${primaryColor};
+  border-radius: 1em;
 `;

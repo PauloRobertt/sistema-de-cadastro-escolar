@@ -1,4 +1,7 @@
-import { ContainerInput } from './styled';
+import { useState } from 'react';
+import { ContainerInput, DivInput, InputButton } from './styled';
+import { FaLock } from 'react-icons/fa';
+import { FaLockOpen } from 'react-icons/fa';
 
 export default function Input({
   label,
@@ -7,15 +10,39 @@ export default function Input({
   minLength,
   maxLength,
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [input, setInput] = useState(type);
+
+  function handleShowPassword() {
+    if (input === 'email') {
+      setInput('email');
+    } else if (!showPassword) {
+      setShowPassword(true);
+      setInput('text');
+    } else {
+      setShowPassword(false);
+      setInput('password');
+    }
+  }
+
   return (
     <ContainerInput>
       <label>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        minLength={minLength}
-        maxLength={maxLength}
-      />
+      <DivInput>
+        <input
+          type={input}
+          placeholder={placeholder}
+          minLength={minLength}
+          maxLength={maxLength}
+        />
+        <InputButton
+          showButton={input}
+          onClick={handleShowPassword}
+          type="button"
+        >
+          {showPassword ? <FaLockOpen /> : <FaLock />}
+        </InputButton>
+      </DivInput>
     </ContainerInput>
   );
 }

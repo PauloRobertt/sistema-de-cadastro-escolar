@@ -5,15 +5,33 @@ export const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+`;
+
+export const DivInput = styled.div`
+  background-color: ${inputColor};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 0.5em;
 
   input {
     padding: 1em;
     border: none;
     border-radius: 0.5em;
     background-color: ${inputColor};
+    width: 100%;
   }
 
   input::placeholder {
     color: ${inputTextColor};
   }
+`;
+
+export const InputButton = styled.button`
+  background-color: ${inputColor};
+  display: ${(props) => (props.showButton != 'email' ? 'block' : 'none')};
+  border: none;
+  font-size: 1em;
+  padding: 0.5em;
+  margin-right: 0.2em;
 `;
