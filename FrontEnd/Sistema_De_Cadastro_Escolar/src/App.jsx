@@ -1,7 +1,11 @@
+import Rotas from './Routes';
+import GlobalStyles from './styles/GlobalStyles';
+
 function App() {
   return (
     <>
-      <h1>Teste</h1>
+      <Rotas />
+      <GlobalStyles />
     </>
   );
 }
