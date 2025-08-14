@@ -4,6 +4,7 @@ import { FaLock } from 'react-icons/fa';
 import { FaLockOpen } from 'react-icons/fa';
 
 export default function Input({
+  id,
   label,
   type,
   placeholder,
@@ -30,16 +31,13 @@ export default function Input({
       <label>{label}</label>
       <DivInput>
         <input
+          id={id}
           type={input}
           placeholder={placeholder}
           minLength={minLength}
           maxLength={maxLength}
         />
-        <InputButton
-          showButton={input}
-          onClick={handleShowPassword}
-          type="button"
-        >
+        <InputButton showButton={id} onClick={handleShowPassword} type="button">
           {showPassword ? <FaLockOpen /> : <FaLock />}
         </InputButton>
       </DivInput>
