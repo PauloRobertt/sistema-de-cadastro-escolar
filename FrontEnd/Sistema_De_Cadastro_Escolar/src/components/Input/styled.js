@@ -13,6 +13,7 @@ export const DivInput = styled.div`
   justify-content: flex-start;
   align-items: center;
   border-radius: 0.5em;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
 
   input {
     padding: 1em;
