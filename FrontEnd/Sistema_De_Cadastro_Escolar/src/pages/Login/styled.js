@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  backgroundColor,
-  primaryColor,
-  secundaryColor,
-} from '../../config/colors';
+import { backgroundColor, primaryColor } from '../../config/colors';
 import { OrganizarImagens } from '../../assets/index';
 
 export const Background = styled.div`
@@ -58,10 +54,6 @@ export const LoginFormWrapper = styled.div`
 
   p {
     text-align: start;
-  }
-
-  p span {
-    color: ${secundaryColor};
   }
 `;
 

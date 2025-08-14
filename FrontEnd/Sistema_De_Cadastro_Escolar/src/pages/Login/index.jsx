@@ -7,6 +7,7 @@ import {
 } from './styled';
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton';
+import LinkButton from '../../components/LinkButton';
 
 export default function index() {
   return (
@@ -18,6 +19,7 @@ export default function index() {
             <h3>Digite seu e-mail e senha para acessar sua conta.</h3>
             <form action="" method="post">
               <Input
+                id="email"
                 label="E-mail"
                 type="email"
                 placeholder="Digite seu e-mail"
@@ -25,6 +27,7 @@ export default function index() {
                 maxLength={100}
               />
               <Input
+                id="password"
                 label="Senha"
                 type="password"
                 placeholder="Digite sua senha"
@@ -35,7 +38,8 @@ export default function index() {
               <SubmitButton text="Login" />
             </form>
             <p>
-              Não tem uma conta? <span>Cadastre-se</span>
+              Não tem uma conta?{' '}
+              <LinkButton path="/register" text="Cadastre-se" />
             </p>
           </LoginFormWrapper>
         </LoginContent>
