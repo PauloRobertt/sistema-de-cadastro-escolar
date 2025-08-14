@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { backgroundColor, primaryColor } from '../../config/colors';
+import {
+  backgroundColor,
+  primaryColor,
+  secundaryColor,
+} from '../../config/colors';
 import { OrganizarImagens } from '../../assets/index';
 
 export const Background = styled.div`
@@ -21,6 +25,7 @@ export const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 export const LoginContent = styled.div`
@@ -40,7 +45,9 @@ export const LoginFormWrapper = styled.div`
   gap: 1.5em;
 
   h1 {
+    font-size: 3em;
     text-align: center;
+    font-weight: bold;
   }
 
   form {
@@ -50,7 +57,11 @@ export const LoginFormWrapper = styled.div`
   }
 
   p {
-    text-align: end;
+    text-align: start;
+  }
+
+  p span {
+    color: ${secundaryColor};
   }
 `;
 

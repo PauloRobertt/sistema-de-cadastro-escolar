@@ -32,8 +32,11 @@ export default function index() {
                 maxLength={50}
               />
               <p>Esqueceu sua senha?</p>
-              <SubmitButton />
+              <SubmitButton text="Login" />
             </form>
+            <p>
+              Não tem uma conta? <span>Cadastre-se</span>
+            </p>
           </LoginFormWrapper>
         </LoginContent>
         <LoginImage />
