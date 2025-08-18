@@ -31,7 +31,14 @@ class TokenController {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
-      res.json(token);
+      res.json({
+        token: token,
+        user: {
+          userID: id,
+          userEmail: emailBody,
+          userNome: user.nome,
+        },
+      });
     } catch (e) {
       res.status(400).json({
         errors: e.errors.map((erros) => { return erros.message; }),
