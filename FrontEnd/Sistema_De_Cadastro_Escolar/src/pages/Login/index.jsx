@@ -1,5 +1,4 @@
 import {
-  Background,
   LoginWrapper,
   LoginFormWrapper,
   LoginContent,
@@ -8,10 +7,11 @@ import {
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton';
 import LinkButton from '../../components/LinkButton';
+import { Container } from '../../styles/GlobalStyles';
 
 export default function index() {
   return (
-    <Background>
+    <Container>
       <LoginWrapper>
         <LoginContent>
           <LoginFormWrapper>
@@ -45,6 +45,6 @@ export default function index() {
         </LoginContent>
         <LoginImage />
       </LoginWrapper>
-    </Background>
+    </Container>
   );
 }

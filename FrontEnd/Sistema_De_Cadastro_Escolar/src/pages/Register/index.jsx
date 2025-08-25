@@ -1,5 +1,4 @@
 import {
-  Background,
   RegisterWrapper,
   RegisterFormWrapper,
   RegisterContent,
@@ -8,10 +7,11 @@ import {
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton';
 import LinkButton from '../../components/LinkButton';
+import { Container } from '../../styles/GlobalStyles';
 
 export default function index() {
   return (
-    <Background>
+    <Container>
       <RegisterWrapper>
         <RegisterContent>
           <RegisterImage />
@@ -50,6 +50,6 @@ export default function index() {
           </RegisterFormWrapper>
         </RegisterContent>
       </RegisterWrapper>
-    </Background>
+    </Container>
   );
 }

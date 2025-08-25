@@ -1,15 +1,11 @@
 import SubmitButton from '../../components/SubmitButton';
-import {
-  ContainerPage404,
-  Background,
-  ContentPage404,
-  Image404,
-} from './styled';
+import { ContainerPage404, ContentPage404, Image404 } from './styled';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { Container } from '../../styles/GlobalStyles';
 
 export default function Page404() {
   return (
-    <Background>
+    <Container>
       <ContainerPage404>
         <Image404 />
         <ContentPage404>
@@ -25,6 +21,6 @@ export default function Page404() {
           />
         </ContentPage404>
       </ContainerPage404>
-    </Background>
+    </Container>
   );
 }
