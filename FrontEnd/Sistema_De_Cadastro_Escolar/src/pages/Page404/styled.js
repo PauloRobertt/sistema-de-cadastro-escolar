@@ -1,16 +1,6 @@
 import styled from 'styled-components';
-import { backgroundColor } from '../../config/colors';
 import { primaryColor } from '../../config/colors';
 import { OrganizarImagens } from '../../assets';
-
-export const Background = styled.div`
-  background-color: ${backgroundColor};
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const ContainerPage404 = styled.div`
   width: 85%;
