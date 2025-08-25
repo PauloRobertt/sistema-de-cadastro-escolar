@@ -1,5 +1,9 @@
 import { LinkBtn } from './styled';
 
-export default function LinkButton({ path, text }) {
-  return <LinkBtn to={path}>{text}</LinkBtn>;
+export default function LinkButton({ path, text, variant }) {
+  return (
+    <LinkBtn variant={variant} to={path}>
+      {text}
+    </LinkBtn>
+  );
 }
