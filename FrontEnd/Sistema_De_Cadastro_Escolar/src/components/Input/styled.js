@@ -30,7 +30,7 @@ export const DivInput = styled.div`
 
 export const InputButton = styled.button`
   background-color: ${inputColor};
-  display: ${(props) => (props.showButton === 'password' ? 'block' : 'none')};
+  display: ${(props) => (props.showbutton === 'password' ? 'block' : 'none')};
   border: none;
   font-size: 1em;
   padding: 0.5em;
