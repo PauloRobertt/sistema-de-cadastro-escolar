@@ -49,8 +49,6 @@ export default function index() {
                 type="text"
                 placeholder="Digite seu nome"
                 onChange={handleOnChange}
-                minLength={3}
-                maxLength={100}
               />
               <Input
                 id="email"
@@ -58,8 +56,6 @@ export default function index() {
                 type="email"
                 placeholder="Digite seu e-mail"
                 onChange={handleOnChange}
-                minLength={3}
-                maxLength={100}
               />
               <Input
                 id="password"
@@ -67,8 +63,6 @@ export default function index() {
                 type="password"
                 placeholder="Digite sua senha"
                 onChange={handleOnChange}
-                minLength={6}
-                maxLength={50}
               />
               <SubmitButton text="Registrar" type="submit" />
             </form>
