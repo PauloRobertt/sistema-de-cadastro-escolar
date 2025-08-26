@@ -8,6 +8,7 @@ export default function Input({
   label,
   type,
   placeholder,
+  onChange,
   minLength,
   maxLength,
 }) {
@@ -34,6 +35,7 @@ export default function Input({
           id={id}
           type={input}
           placeholder={placeholder}
+          onChange={onChange}
           minLength={minLength}
           maxLength={maxLength}
         />
