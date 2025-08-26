@@ -5,6 +5,7 @@ import { OrganizarImagens } from '../../assets/index';
 export const RegisterWrapper = styled.div`
   width: 85%;
   height: 85%;
+  max-height: 550px;
   background-color: #fff;
   border-radius: 1em;
   border: 0.5em solid #ffff;
