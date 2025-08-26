@@ -5,6 +5,7 @@ import { OrganizarImagens } from '../../assets';
 export const ContainerPage404 = styled.div`
   width: 85%;
   height: 85%;
+  max-height: 550px;
   background-color: #ffff;
   padding: 0.5em;
   border: 0.5em solid ${primaryColor};
