@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 
 import rootSaga from './modules/rootSaga';
-import persistedReducer from './modules/example/reduxPersist';
+import persistedReducer from './modules/auth/reduxPersist';
 
 const sagaMiddleware = createSagaMiddleware();
 
