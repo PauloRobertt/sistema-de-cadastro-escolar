@@ -13,7 +13,7 @@ import LinkButton from '../../components/LinkButton';
 import { Container } from '../../styles/GlobalStyles';
 
 export default function index() {
-  const [user, userState] = useState({});
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   const submit = (e) => {
@@ -32,7 +32,7 @@ export default function index() {
   }
 
   function handleOnChange(e) {
-    userState({ ...user, [e.target.id]: e.target.value });
+    setUser({ ...user, [e.target.id]: e.target.value });
   }
 
   return (
