@@ -7,9 +7,8 @@ import Menu from '../../layouts/Menu/input';
 import LinkButton from '../../components/LinkButton';
 
 import { FaUserCircle } from 'react-icons/fa';
-import { FaRegUser } from 'react-icons/fa';
 import { IoIosAdd } from 'react-icons/io';
-import { MdDelete } from 'react-icons/md';
+import { FaUserMinus } from 'react-icons/fa';
 import { FaUserEdit } from 'react-icons/fa';
 
 export default function AlunosPage() {
@@ -75,7 +74,7 @@ export default function AlunosPage() {
                   </td>
                   <td id="op">
                     <div>
-                      <MdDelete />
+                      <FaUserMinus />
                     </div>
                   </td>
                 </tr>
