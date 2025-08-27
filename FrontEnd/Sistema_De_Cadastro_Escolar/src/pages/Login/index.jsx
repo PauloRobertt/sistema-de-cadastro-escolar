@@ -1,38 +1,45 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from '../../service/axios';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+//Styles
 import {
   LoginWrapper,
   LoginFormWrapper,
   LoginContent,
   LoginImage,
 } from './styled';
+
+//Componentes
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton';
 import LinkButton from '../../components/LinkButton';
 import { Container } from '../../styles/GlobalStyles';
 
-export default function index() {
-  const [user, userState] = useState({});
-  const navigate = useNavigate();
+//Actions
+import { loginRequest } from '../../store/modules/auth/actions';
 
-  const submit = (e) => {
+export default function index() {
+  const [user, setUser] = useState({});
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const prevPath = location.state;
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    login(user);
+    setUser({ email: 'Teste@hotmail.com', password: 'Senha123' });
+    dispatch(
+      loginRequest({
+        email: user.email,
+        password: user.password,
+        prevPath,
+      }),
+    );
   };
 
-  async function login(user) {
-    try {
-      const response = await axios.post('/tokens/', user);
-      console.log('Logado');
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   function handleOnChange(e) {
-    userState({ ...user, [e.target.id]: e.target.value });
+    setUser({ ...user, [e.target.id]: e.target.value });
   }
 
   return (
@@ -42,7 +49,7 @@ export default function index() {
           <LoginFormWrapper>
             <h1>Bem-Vindo</h1>
             <h3>Digite seu e-mail e senha para acessar sua conta.</h3>
-            <form onSubmit={submit} method="post">
+            <form onSubmit={handleSubmit} method="post">
               <Input
                 id="email"
                 label="E-mail"
