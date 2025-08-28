@@ -1,23 +1,11 @@
 import styled from 'styled-components';
-import {
-  backgroundColor,
-  primaryColor,
-  secundaryColor,
-} from '../../config/colors';
+import { primaryColor, secundaryColor } from '../../config/colors';
 import { OrganizarImagens } from '../../assets/index';
-
-export const Background = styled.div`
-  background-color: ${backgroundColor};
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const RegisterWrapper = styled.div`
   width: 85%;
   height: 85%;
+  max-height: 550px;
   background-color: #fff;
   border-radius: 1em;
   border: 0.5em solid #ffff;

@@ -8,6 +8,7 @@ export default function Input({
   label,
   type,
   placeholder,
+  onChange,
   minLength,
   maxLength,
 }) {
@@ -34,10 +35,11 @@ export default function Input({
           id={id}
           type={input}
           placeholder={placeholder}
+          onChange={onChange}
           minLength={minLength}
           maxLength={maxLength}
         />
-        <InputButton showButton={id} onClick={handleShowPassword} type="button">
+        <InputButton showbutton={id} onClick={handleShowPassword} type="button">
           {showPassword ? <FaLockOpen /> : <FaLock />}
         </InputButton>
       </DivInput>

@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { backgroundColor } from '../config/colors';
 
 export default createGlobalStyle`
   * {
@@ -27,4 +28,14 @@ export default createGlobalStyle`
   ul{
     list-style: none;
   }
+`;
+
+export const Container = styled.div`
+  background-color: ${backgroundColor};
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

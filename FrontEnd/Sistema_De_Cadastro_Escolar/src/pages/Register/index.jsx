@@ -1,5 +1,7 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../../service/axios';
 import {
-  Background,
   RegisterWrapper,
   RegisterFormWrapper,
   RegisterContent,
@@ -8,41 +10,61 @@ import {
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton';
 import LinkButton from '../../components/LinkButton';
+import { Container } from '../../styles/GlobalStyles';
 
 export default function index() {
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+
+  const submit = (e) => {
+    e.preventDefault();
+    register(user);
+  };
+
+  async function register(user) {
+    try {
+      const response = await axios.post('/users/', user);
+      navigate('/login');
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function handleOnChange(e) {
+    setUser({ ...user, [e.target.id]: e.target.value });
+  }
+
   return (
-    <Background>
+    <Container>
       <RegisterWrapper>
         <RegisterContent>
           <RegisterImage />
           <RegisterFormWrapper>
             <h1>Crie sua conta</h1>
-            <form action="" method="post">
+            <form onSubmit={submit}>
               <Input
-                id="name"
+                id="nome"
                 label="Nome"
                 type="text"
                 placeholder="Digite seu nome"
-                minLength={3}
-                maxLength={100}
+                onChange={handleOnChange}
               />
               <Input
                 id="email"
                 label="E-mail"
                 type="email"
                 placeholder="Digite seu e-mail"
-                minLength={3}
-                maxLength={100}
+                onChange={handleOnChange}
               />
               <Input
                 id="password"
                 label="Senha"
                 type="password"
                 placeholder="Digite sua senha"
-                minLength={6}
-                maxLength={50}
+                onChange={handleOnChange}
               />
-              <SubmitButton text="Registrar" />
+              <SubmitButton text="Registrar" type="submit" />
             </form>
             <p>
               Já tem uma conta? <LinkButton path="/login" text="Entre" />
@@ -50,6 +72,6 @@ export default function index() {
           </RegisterFormWrapper>
         </RegisterContent>
       </RegisterWrapper>
-    </Background>
+    </Container>
   );
 }
