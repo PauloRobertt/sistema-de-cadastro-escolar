@@ -1,17 +1,13 @@
 import { useState } from 'react';
-import { ContainerInput, DivInput, InputButton } from './styled';
+
+//Componentes
+import { ContainerInput, InputButton } from './styled';
+
+//Icons
 import { FaLock } from 'react-icons/fa';
 import { FaLockOpen } from 'react-icons/fa';
 
-export default function Input({
-  id,
-  label,
-  type,
-  placeholder,
-  onChange,
-  minLength,
-  maxLength,
-}) {
+export default function Input({ id, type, placeholder, value, onChange }) {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState(type);
 
@@ -29,20 +25,16 @@ export default function Input({
 
   return (
     <ContainerInput>
-      <label>{label}</label>
-      <DivInput>
-        <input
-          id={id}
-          type={input}
-          placeholder={placeholder}
-          onChange={onChange}
-          minLength={minLength}
-          maxLength={maxLength}
-        />
-        <InputButton showbutton={id} onClick={handleShowPassword} type="button">
-          {showPassword ? <FaLockOpen /> : <FaLock />}
-        </InputButton>
-      </DivInput>
+      <input
+        id={id}
+        type={input}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+      <InputButton showbutton={id} onClick={handleShowPassword} type="button">
+        {showPassword ? <FaLockOpen /> : <FaLock />}
+      </InputButton>
     </ContainerInput>
   );
 }
