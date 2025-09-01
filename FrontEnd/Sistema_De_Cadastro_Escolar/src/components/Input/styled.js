@@ -2,12 +2,6 @@ import styled from 'styled-components';
 import { inputColor, inputTextColor } from '../../config/colors';
 
 export const ContainerInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-`;
-
-export const DivInput = styled.div`
   background-color: ${inputColor};
   display: flex;
   justify-content: flex-start;

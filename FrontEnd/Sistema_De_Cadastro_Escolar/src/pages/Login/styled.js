@@ -59,3 +59,9 @@ export const LoginImage = styled.div`
   background-color: ${primaryColor};
   border-radius: 1em;
 `;
+
+export const ContainerInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+`;

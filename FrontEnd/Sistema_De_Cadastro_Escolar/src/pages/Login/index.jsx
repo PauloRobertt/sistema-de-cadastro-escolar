@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-//Styles
+//Styled-Components
 import {
   LoginWrapper,
   LoginFormWrapper,
   LoginContent,
   LoginImage,
+  ContainerInput,
 } from './styled';
 
 //Componentes
@@ -50,20 +51,26 @@ export default function index() {
             <h1>Bem-Vindo</h1>
             <h3>Digite seu e-mail e senha para acessar sua conta.</h3>
             <form onSubmit={handleSubmit} method="post">
-              <Input
-                id="email"
-                label="E-mail"
-                type="email"
-                placeholder="Digite seu e-mail"
-                onChange={handleOnChange}
-              />
-              <Input
-                id="password"
-                label="Senha"
-                type="password"
-                placeholder="Digite sua senha"
-                onChange={handleOnChange}
-              />
+              <ContainerInput>
+                <label>E-mail</label>
+                <Input
+                  id="email"
+                  label="E-mail"
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  onChange={handleOnChange}
+                />
+              </ContainerInput>
+              <ContainerInput>
+                <label>Senha</label>
+                <Input
+                  id="password"
+                  label="Senha"
+                  type="password"
+                  placeholder="Digite sua senha"
+                  onChange={handleOnChange}
+                />
+              </ContainerInput>
               <LinkButton path="" text={'Esqueceu sua senha?'} />
               <SubmitButton type="submit" text="Login" />
             </form>
