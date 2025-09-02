@@ -6,3 +6,6 @@ export const backgroundColor = '#e0e0e0';
 
 export const inputColor = '#f4f4fc';
 export const inputTextColor = '#88888f';
+
+export const ErrorColor = '#dc2626';
+export const DarkErrorColor = '#831717ff';
