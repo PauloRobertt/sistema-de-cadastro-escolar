@@ -9,3 +9,5 @@ export const inputTextColor = '#88888f';
 
 export const ErrorColor = '#dc2626';
 export const DarkErrorColor = '#831717ff';
+
+export const textColor = '#6b7280';
