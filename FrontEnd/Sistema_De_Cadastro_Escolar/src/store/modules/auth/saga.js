@@ -7,9 +7,7 @@ import history from '../../../service/history';
 
 function* loginRequest({ payload }) {
   try {
-    console.log('Payload ', payload);
     const response = yield call(axios.post, '/tokens/', payload);
-    console.log('Saga Response', response);
     yield put(actions.loginSuccess({ ...response.data }));
 
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
@@ -17,6 +15,24 @@ function* loginRequest({ payload }) {
   } catch (error) {
     console.log(error);
     yield put(actions.loginError());
+  }
+}
+
+function* editRequest({ payload }) {
+  const { nome, email, password } = payload;
+
+  try {
+    yield call(axios.put, '/users/', {
+      nome,
+      email,
+      password,
+    });
+    yield put(actions.editSuccess({ nome, email }));
+  } catch (error) {
+    console.log(error);
+    if (error.status === 401) {
+      yield put(actions.loginError());
+    }
   }
 }
 
@@ -30,5 +46,6 @@ function persistRequest({ payload }) {
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
+  takeLatest(types.EDIT_REQUEST, editRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRequest),
 ]);

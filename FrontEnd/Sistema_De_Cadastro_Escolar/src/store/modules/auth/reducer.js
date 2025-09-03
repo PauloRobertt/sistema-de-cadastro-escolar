@@ -23,6 +23,22 @@ export default function (state = initialState, action) {
       return newState;
     }
 
+    case types.EDIT_SUCESS: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          userNome: action.payload.nome,
+          userEmail: action.payload.email,
+        },
+      };
+    }
+
+    case types.EDIT_FAILURE: {
+      const newState = { ...state };
+      return newState;
+    }
+
     default:
       return state;
   }
