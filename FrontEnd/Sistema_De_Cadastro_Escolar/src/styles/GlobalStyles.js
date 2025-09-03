@@ -39,3 +39,15 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ContainerConteudo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: #ffff;
+  margin-left: 18em;
+  width: 100%;
+  height: 100%;
+  padding: 2em;
+  border-radius: 1em;
+`;
