@@ -29,7 +29,6 @@ export default function index() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser({ email: 'Teste@hotmail.com', password: 'Senha123' });
     dispatch(
       loginRequest({
         email: user.email,
