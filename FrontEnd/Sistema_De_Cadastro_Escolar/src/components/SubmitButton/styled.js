@@ -27,7 +27,7 @@ const variantStyles = {
     background-color: #f4f4f4;
     padding: 0.5em;
     border-radius: 0.5em;
-    border: none;
+    border: 1px solid #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
