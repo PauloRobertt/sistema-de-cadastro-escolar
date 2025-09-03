@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ErrorColor, DarkErrorColor } from '../../config/colors';
+import { ErrorColor, DarkErrorColor, textColor } from '../../config/colors';
 
 export const ContainerUsuario = styled.div`
   display: flex;
@@ -8,9 +8,14 @@ export const ContainerUsuario = styled.div`
   width: 100%;
   height: 100%;
 
+  p {
+    color: ${textColor};
+  }
+
   .headerForm {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .headerForm div {

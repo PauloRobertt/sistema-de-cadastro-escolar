@@ -1,4 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import axios from '../../service/axios';
 
 //Estillos
 import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
@@ -22,17 +25,48 @@ import Menu from '../../layouts/Menu/input';
 import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton/index';
 
+import * as action from '../../store/modules/auth/actions';
+
 export default function index() {
+  const dispatch = useDispatch();
+  const [user, setUser] = useState(
+    useSelector((state) => state.auth.authReducer.user),
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      action.editRequest({
+        email: user.userEmail,
+        nome: user.userNome,
+        password: user.password || undefined,
+      }),
+    );
+  };
+
+  const handleOnChange = (e) => {
+    setUser({ ...user, [e.target.id]: e.target.value });
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await axios.delete('/users/');
+      dispatch(action.loginError());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <Menu />
       <ContainerConteudo>
         <ContainerUsuario>
           <DadosUsuario>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="headerForm">
                 <div>
-                  <h1>Dados do Usuario: </h1>
+                  <h1>Dados do Usuario</h1>
                   <p>
                     Aperte no botão "Editar Dados" caso queira atualizar suas
                     informações!
@@ -54,13 +88,12 @@ export default function index() {
                   <FaRegUser /> Nome
                 </label>
                 <Input
-                  id="nome"
-                  value={useSelector(
-                    (state) => state.auth.authReducer.user.userNome,
-                  )}
+                  id="userNome"
+                  value={user.userNome}
                   label="Nome"
                   type="text"
                   placeholder="Digite seu nome"
+                  onChange={handleOnChange}
                 />
               </ContainerInput>
               <ContainerInput>
@@ -68,13 +101,12 @@ export default function index() {
                   <MdEmail /> E-mail
                 </label>
                 <Input
-                  id="email"
-                  value={useSelector(
-                    (state) => state.auth.authReducer.user.userEmail,
-                  )}
+                  id="userEmail"
+                  value={user.userEmail}
                   label="E-mail"
                   type="email"
                   placeholder="Digite seu e-mail"
+                  onChange={handleOnChange}
                 />
               </ContainerInput>
               <ContainerInput>
@@ -86,6 +118,7 @@ export default function index() {
                   label="Senha"
                   type="password"
                   placeholder="Digite nova senha"
+                  onChange={handleOnChange}
                 />
               </ContainerInput>
             </form>
@@ -95,7 +128,7 @@ export default function index() {
               <MdDelete /> Zona de Perigo
             </h2>
             <p>Ações irreversíveis relacionadas à sua conta</p>
-            <ButtonDeleteUser>
+            <ButtonDeleteUser type="button" onClick={handleDeleteAccount}>
               <MdDelete />
               Excluir Conta
             </ButtonDeleteUser>
