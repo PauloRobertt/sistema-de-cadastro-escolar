@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
-import { secundaryColor, secundaryDarkColor } from '../../config/colors';
+import {
+  primaryColor,
+  primaryDarkColor,
+  secundaryColor,
+  secundaryDarkColor,
+} from '../../config/colors';
 
 const variantStyles = {
   primary: css`
@@ -20,6 +25,24 @@ const variantStyles = {
     &:hover {
       background-color: ${secundaryDarkColor};
       color: #ffff;
+    }
+  `,
+
+  secondary: css`
+    background-color: ${primaryColor};
+    transition: background-color 300ms ease-in-out;
+    color: #ffff;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 0.5em;
+
+    &:hover {
+      background-color: ${primaryDarkColor};
     }
   `,
 
