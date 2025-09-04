@@ -1,40 +1,10 @@
 import styled from 'styled-components';
-import {
-  backgroundColor,
-  primaryColor,
-  primaryDarkColor,
-} from '../../config/colors';
+import { primaryColor, primaryDarkColor, textColor } from '../../config/colors';
 
-export const ContainerAlunos = styled.div`
+export const HeaderContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 1em;
-  background-color: #ffff;
-  margin-left: 18em;
-  width: 100%;
-  height: 100%;
-  padding: 1em;
-  border-radius: 1em;
-
-  button {
-    width: 15em;
-    background-color: ${primaryColor};
-    transition: background-color 300ms ease-in-out;
-    color: #ffff;
-    font-size: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5em;
-    padding: 0.5em;
-    border: none;
-    border-radius: 0.5em;
-    font-weight: bold;
-  }
-
-  button:hover {
-    background-color: ${primaryDarkColor};
-  }
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TableAlunos = styled.table`
@@ -46,20 +16,16 @@ export const TableAlunos = styled.table`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0.5em 1em;
+    padding: 1em;
+    border-bottom: 1px solid #eee;
   }
 
-  thead tr {
-    border-radius: 1em;
-    background-color: ${backgroundColor};
+  tr:hover {
+    background-color: #f7f7f7ff;
   }
 
   table h3 {
     text-align: center;
-  }
-
-  tbody tr {
-    border-bottom: 1px solid #eee;
   }
 
   th,
@@ -124,5 +90,106 @@ export const TableAlunos = styled.table`
   td#op div:last-of-type:hover {
     transition: 300ms color;
     color: red;
+  }
+`;
+
+export const ContainerAluno = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 500px;
+    height: 580px;
+    border-radius: 1em;
+    padding: 10px;
+    background-color: #f4f4f4;
+  }
+
+  .conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1em;
+
+    width: 100%;
+    height: 90%;
+    background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    position: relative;
+  }
+
+  .conteudo p {
+    color: ${textColor};
+  }
+
+  .conteudo .containerButtons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .conteudo .containerButtons .buttonCancel {
+    border: 1px solid ${textColor};
+    padding: 0.8em 1em;
+    border-radius: 0.5em;
+    background-color: white;
+    font-size: 1em;
+    transition: background-color 300ms ease-in-out;
+  }
+
+  .conteudo .containerButtons .buttonCancel:hover {
+    background-color: #ecececff;
+  }
+
+  .containerInputs {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Foto {
+    border-radius: 5em;
+    border: 5px solid #dbdbdbff;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -40px;
+    left: 20px;
+  }
+
+  .Nome {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-top: 35px;
+  }
+`;
+
+export const ContainerInput = styled.div`
+  border-top: 1px solid #eee;
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .inputs {
+    display: flex;
+    gap: 0.5em;
+    width: 70%;
   }
 `;
