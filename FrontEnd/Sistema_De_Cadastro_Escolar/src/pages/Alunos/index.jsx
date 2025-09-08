@@ -5,7 +5,7 @@ import axios from '../../service/axios';
 import {
   TableAlunos,
   HeaderContainer,
-  ContainerAluno,
+  ContainerNewAluno,
   ContainerInput,
 } from './styled';
 import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
@@ -13,7 +13,6 @@ import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
 //Componentes
 import Menu from '../../layouts/Menu/input';
 import SubmitButton from '../../components/SubmitButton';
-import LinkButton from '../../components/LinkButton';
 import Input from '../../components/Input/input';
 
 //Icons
@@ -24,6 +23,8 @@ import { FaUserEdit } from 'react-icons/fa';
 
 export default function AlunosPage() {
   const [alunos, setAlunos] = useState([]);
+  const [aluno, setAluno] = useState({});
+  const [showAddAluno, setShowAddAluno] = useState(false);
 
   useEffect(() => {
     async function getAlunos() {
@@ -37,6 +38,36 @@ export default function AlunosPage() {
     getAlunos();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!aluno.id) {
+      await addAluno(aluno);
+    }
+  };
+
+  const handleOnChange = (e) => {
+    setAluno({ ...aluno, [e.target.id]: e.target.value });
+  };
+
+  const addAluno = async (aluno) => {
+    try {
+      await axios.post('/alunos/', aluno);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAluno = async (id) => {
+    try {
+      if (!id) {
+        showAddAluno ? setShowAddAluno(false) : setShowAddAluno(true);
+      } else {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <Menu />
@@ -44,6 +75,9 @@ export default function AlunosPage() {
         <HeaderContainer>
           <h1>Alunos</h1>
           <SubmitButton
+            onClick={() => {
+              getAluno();
+            }}
             text={
               <>
                 <IoIosAdd fontSize={'1.5em'} /> Adicionar novo aluno
@@ -55,24 +89,27 @@ export default function AlunosPage() {
         </HeaderContainer>
         {alunos.length > 0 ? (
           <div>
-            <ContainerAluno>
+            <ContainerNewAluno showAddAluno={showAddAluno}>
               <div className="container">
-                <div className="conteudo">
-                  <div className="Foto"></div>
-                  <div className="Nome">
-                    <h3>Nome Sobrenome</h3>
-                    <p>Email@email.com</p>
+                <form onSubmit={handleSubmit} className="formAluno">
+                  <div className="headerForm">
+                    <h1>Adicionar Aluno</h1>
+                    <p>Informe os dados do aluno abaixo:</p>
                   </div>
                   <div className="containerInputs">
                     <ContainerInput>
                       <label>Nome</label>
                       <div className="inputs">
                         <Input
+                          onChange={handleOnChange}
+                          value={aluno.nome || ''}
                           id="nome"
                           type="text"
                           placeholder="Digite o nome do aluno"
                         />
                         <Input
+                          onChange={handleOnChange}
+                          value={aluno.sobrenome || ''}
                           id="sobrenome"
                           type="text"
                           placeholder="Digite o sobrenome do aluno"
@@ -83,6 +120,8 @@ export default function AlunosPage() {
                       <label>E-mail</label>
                       <div className="inputs">
                         <Input
+                          onChange={handleOnChange}
+                          value={aluno.email || ''}
                           id="email"
                           type="email"
                           placeholder="Digite o e-mail do aluno ou responsavel"
@@ -93,34 +132,37 @@ export default function AlunosPage() {
                       <label>Idade</label>
                       <div className="inputs">
                         <Input
+                          onChange={handleOnChange}
+                          value={aluno.idade || ''}
                           id="idade"
-                          type="text"
+                          type="number"
+                          minNumber={1}
+                          maxNumber={120}
                           placeholder="Digite a idade do aluno"
-                        />
-                      </div>
-                    </ContainerInput>
-                    <ContainerInput>
-                      <label>Foto</label>
-                      <div className="inputs">
-                        <Input
-                          id="foto"
-                          type="file"
-                          accept="image/png, image/jpeg"
                         />
                       </div>
                     </ContainerInput>
                   </div>
                   <div className="containerButtons">
-                    <button className="buttonCancel">Cancel</button>
+                    <button
+                      className="buttonCancel"
+                      type="button"
+                      onClick={() => {
+                        getAluno() + setAluno({});
+                      }}
+                    >
+                      Cancel
+                    </button>
                     <SubmitButton
-                      text={'Salvas Mudanças'}
-                      type={'button'}
+                      text={'Criar Aluno'}
+                      type={'submit'}
                       variant={'secondary'}
                     />
                   </div>
-                </div>
+                </form>
               </div>
-            </ContainerAluno>
+            </ContainerNewAluno>
+
             <TableAlunos>
               <thead>
                 <tr>
@@ -152,17 +194,21 @@ export default function AlunosPage() {
                     <td id="email">{aluno.email}</td>
                     <td id="age">{aluno.idade}</td>
                     <td id="op">
-                      <div>
-                        <LinkButton
-                          variant={'tableOp'}
-                          path={''}
-                          text={<FaUserEdit />}
+                      <div className="editButton">
+                        <FaUserEdit
+                          onClick={() => {
+                            getAluno(aluno.id);
+                          }}
                         />
                       </div>
                     </td>
                     <td id="op">
-                      <div>
-                        <FaUserMinus />
+                      <div className="deleteButton">
+                        <FaUserMinus
+                          onClick={() => {
+                            handleDelete(aluno.id);
+                          }}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -171,15 +217,93 @@ export default function AlunosPage() {
             </TableAlunos>
           </div>
         ) : (
-          <TableAlunos>
-            <tbody>
-              <tr>
-                <td>
-                  <h3>Nenhum aluno encontrado!</h3>
-                </td>
-              </tr>
-            </tbody>
-          </TableAlunos>
+          <div>
+            <ContainerNewAluno showAddAluno={showAddAluno}>
+              <div className="container">
+                <form onSubmit={handleSubmit} className="formAluno">
+                  <div className="headerForm">
+                    <h1>Adicionar Aluno</h1>
+                    <p>Informe os dados do aluno abaixo:</p>
+                  </div>
+                  <div className="containerInputs">
+                    <ContainerInput>
+                      <label>Nome</label>
+                      <div className="inputs">
+                        <Input
+                          onChange={handleOnChange}
+                          value={aluno.nome || ''}
+                          id="nome"
+                          type="text"
+                          placeholder="Digite o nome do aluno"
+                        />
+                        <Input
+                          onChange={handleOnChange}
+                          value={aluno.sobrenome || ''}
+                          id="sobrenome"
+                          type="text"
+                          placeholder="Digite o sobrenome do aluno"
+                        />
+                      </div>
+                    </ContainerInput>
+                    <ContainerInput>
+                      <label>E-mail</label>
+                      <div className="inputs">
+                        <Input
+                          onChange={handleOnChange}
+                          value={aluno.email || ''}
+                          id="email"
+                          type="email"
+                          placeholder="Digite o e-mail do aluno ou responsavel"
+                        />
+                      </div>
+                    </ContainerInput>
+                    <ContainerInput>
+                      <label>Idade</label>
+                      <div className="inputs">
+                        <Input
+                          onChange={handleOnChange}
+                          value={aluno.idade || ''}
+                          id="idade"
+                          type="number"
+                          minNumber={1}
+                          maxNumber={120}
+                          placeholder="Digite a idade do aluno"
+                        />
+                      </div>
+                    </ContainerInput>
+                  </div>
+                  <div className="containerButtons">
+                    <button
+                      className="buttonCancel"
+                      type="button"
+                      onClick={() => {
+                        showAddAluno
+                          ? setShowAddAluno(false) + setAluno({})
+                          : setShowAddAluno(true);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <SubmitButton
+                      text={'Criar Aluno'}
+                      type={'submit'}
+                      variant={'secondary'}
+                    />
+                  </div>
+                </form>
+              </div>
+            </ContainerNewAluno>
+
+            <TableAlunos>
+              <tbody>
+                <tr>
+                  <td>
+                    <h3>Nenhum aluno encontrado!</h3>
+                  </td>
+                </tr>
+              </tbody>
+            </TableAlunos>
+          </div>
         )}
       </ContainerConteudo>
     </Container>
