@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryColor, primaryDarkColor, textColor } from '../../config/colors';
+import { textColor } from '../../config/colors';
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -90,6 +90,78 @@ export const TableAlunos = styled.table`
   td#op div:last-of-type:hover {
     transition: 300ms color;
     color: red;
+  }
+`;
+
+export const ContainerNewAluno = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: ${({ showAddAluno }) => (showAddAluno ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+
+  .headerForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .headerForm p {
+    color: ${textColor};
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 500px;
+    height: 580px;
+    border-radius: 1em;
+    padding: 10px;
+    background-color: #f4f4f4;
+  }
+
+  .formAluno {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+    height: 90%;
+    background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+
+  .formAluno .containerButtons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .formAluno .containerButtons .buttonCancel {
+    border: 1px solid ${textColor};
+    padding: 0.8em 1em;
+    border-radius: 0.5em;
+    background-color: white;
+    font-size: 1em;
+    transition: background-color 300ms ease-in-out;
+  }
+
+  .formAluno .containerButtons .buttonCancel:hover {
+    background-color: #ecececff;
   }
 `;
 
