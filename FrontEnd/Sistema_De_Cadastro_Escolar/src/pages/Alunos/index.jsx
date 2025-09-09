@@ -49,6 +49,14 @@ export default function AlunosPage() {
     setAluno({ ...aluno, [e.target.id]: e.target.value });
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/alunos/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addAluno = async (aluno) => {
     try {
       await axios.post('/alunos/', aluno);

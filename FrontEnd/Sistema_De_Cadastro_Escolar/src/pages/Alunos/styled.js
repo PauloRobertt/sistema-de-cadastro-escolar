@@ -87,7 +87,12 @@ export const TableAlunos = styled.table`
     align-items: center;
   }
 
-  td#op div:last-of-type:hover {
+  td#op .editButton:hover {
+    transition: 300ms color;
+    color: #2563eb;
+  }
+
+  td#op .deleteButton:hover {
     transition: 300ms color;
     color: red;
   }
