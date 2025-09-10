@@ -119,3 +119,50 @@ export const ContainerInput = styled.div`
     width: 70%;
   }
 `;
+
+export const UploadPhotoModal = styled.div`
+  display: ${({ showUploadPhoto }) => (showUploadPhoto ? 'flex' : 'none')};
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border: 10px solid #eee;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-570px, -280px);
+  width: 300px;
+  height: 300px;
+  border-radius: 1em;
+  padding: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+  }
+
+  label {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 5px dashed ${colors.primaryColor};
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  #foto {
+    display: none;
+  }
+`;

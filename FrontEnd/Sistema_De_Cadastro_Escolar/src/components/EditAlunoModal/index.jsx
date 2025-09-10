@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from '../../service/axios';
 
 //Estilos
-import { ContainerEditAluno, ContainerInput } from './styled';
+import { ContainerEditAluno, ContainerInput, UploadPhotoModal } from './styled';
 
 //Componentes
 import SubmitButton from '../../components/SubmitButton';
@@ -15,6 +15,10 @@ import { MdOutlineEdit } from 'react-icons/md';
 
 export default function EditAlunoModal(props) {
   const [aluno, setAluno] = useState(props.dadosAluno);
+  const [showPhoto, setShowPhoto] = useState(false);
+  const [foto, setFoto] = useState();
+  const [file, setFile] = useState();
+
   console.log(aluno);
 
   useEffect(() => {
@@ -23,14 +27,44 @@ export default function EditAlunoModal(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addAluno(aluno);
+    editAluno(aluno);
+  };
+
+  const handleSubmitPhoto = (e) => {
+    e.preventDefault();
+    console.log('handle', aluno);
+    uploadPhoto(file, aluno.id);
+  };
+
+  const uploadPhoto = async (foto, id) => {
+    const formData = new FormData();
+    formData.append('photo-file', foto);
+    formData.append('aluno_id', id);
+
+    try {
+      await axios.post('/photo-profile/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleOnChange = (e) => {
     setAluno({ ...aluno, [e.target.id]: e.target.value });
   };
 
-  const addAluno = async (aluno) => {
+  const handleOnChangePhoto = (e) => {
+    const photoFile = e.target.files[0];
+    setFile(photoFile);
+    const fotoURL = URL.createObjectURL(photoFile);
+
+    setFoto(fotoURL);
+  };
+
+  const editAluno = async (aluno) => {
     try {
       await axios.put(`/alunos/${aluno.id}`, aluno);
     } catch (error) {
@@ -57,7 +91,13 @@ export default function EditAlunoModal(props) {
                 <FaUserCircle className="profile" size={'2em'} />
               )}
             </div>
-            <MdOutlineEdit cursor={'pointer'} size={'1.3em'} />
+            <MdOutlineEdit
+              onClick={() =>
+                showPhoto ? setShowPhoto(false) : setShowPhoto(true)
+              }
+              cursor={'pointer'}
+              size={'1.3em'}
+            />
           </div>
           <div className="DadosUsuario">
             <h3>
@@ -132,6 +172,20 @@ export default function EditAlunoModal(props) {
           </form>
         </div>
       </div>
+      <UploadPhotoModal showUploadPhoto={showPhoto}>
+        <h1>Foto</h1>
+        <form onSubmit={handleSubmitPhoto}>
+          <label htmlFor="foto">
+            {foto ? <img src={foto} alt="Foto aluno" /> : 'Selecionar'}
+            <input type="file" id="foto" onChange={handleOnChangePhoto} />
+          </label>
+          <SubmitButton
+            text={'Salvar Foto'}
+            type="submit"
+            variant={'secondary'}
+          />
+        </form>
+      </UploadPhotoModal>
     </ContainerEditAluno>
   );
 }
