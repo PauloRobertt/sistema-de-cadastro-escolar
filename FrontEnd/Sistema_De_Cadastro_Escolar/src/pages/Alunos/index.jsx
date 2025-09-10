@@ -8,7 +8,8 @@ import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
 //Componentes
 import Menu from '../../layouts/Menu/input';
 import SubmitButton from '../../components/SubmitButton';
-import AddAlunoForm from '../../components/AddAlunoForm';
+import EditAlunoModal from '../../components/EditAlunoModal';
+import AddAlunoModal from '../../components/AddAlunoModal';
 
 //Icons
 import { FaUserCircle } from 'react-icons/fa';
@@ -20,6 +21,7 @@ export default function AlunosPage() {
   const [alunos, setAlunos] = useState([]);
   const [aluno, setAluno] = useState({});
   const [showAddAluno, setShowAddAluno] = useState(false);
+  const [showEditAluno, setShowEditAluno] = useState(false);
 
   useEffect(() => {
     async function getAlunos() {
@@ -46,6 +48,9 @@ export default function AlunosPage() {
       if (!id) {
         showAddAluno ? setShowAddAluno(false) : setShowAddAluno(true);
       } else {
+        showEditAluno ? setShowEditAluno(false) : setShowEditAluno(true);
+        const { data } = await axios.get(`/alunos/${id}`);
+        setAluno(data);
       }
     } catch (error) {
       console.log(error);
@@ -73,7 +78,12 @@ export default function AlunosPage() {
         </HeaderContainer>
         {alunos.length > 0 ? (
           <div>
-            <AddAlunoForm getAluno={getAluno} showForm={showAddAluno} />
+            <AddAlunoModal getAluno={getAluno} showForm={showAddAluno} />
+            <EditAlunoModal
+              getAluno={getAluno}
+              dadosAluno={aluno}
+              showForm={showEditAluno}
+            />
 
             <TableAlunos>
               <thead>
@@ -130,7 +140,7 @@ export default function AlunosPage() {
           </div>
         ) : (
           <div>
-            <AddAlunoForm getAluno={getAluno} showForm={showAddAluno} />
+            <AddAlunoModal getAluno={getAluno} showForm={showAddAluno} />
 
             <TableAlunos>
               <tbody>
