@@ -125,6 +125,7 @@ export const UploadPhotoModal = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5em;
   background-color: white;
   border: 10px solid #eee;
   position: absolute;
@@ -132,7 +133,7 @@ export const UploadPhotoModal = styled.div`
   left: 50%;
   transform: translate(-570px, -280px);
   width: 300px;
-  height: 300px;
+  height: 330px;
   border-radius: 1em;
   padding: 20px;
 

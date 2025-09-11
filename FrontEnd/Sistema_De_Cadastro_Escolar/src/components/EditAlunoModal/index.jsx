@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import axios from '../../service/axios';
+import * as actions from '../../store/modules/auth/actions';
 
-//Estilos
+//Styled-Components
 import { ContainerEditAluno, ContainerInput, UploadPhotoModal } from './styled';
 
 //Componentes
@@ -19,7 +21,7 @@ export default function EditAlunoModal(props) {
   const [foto, setFoto] = useState();
   const [file, setFile] = useState();
 
-  console.log(aluno);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setAluno(props.dadosAluno);
@@ -49,6 +51,7 @@ export default function EditAlunoModal(props) {
       });
     } catch (error) {
       console.log(error);
+      if (error.status === 401) dispatch(actions.loginError());
     }
   };
 
@@ -69,6 +72,7 @@ export default function EditAlunoModal(props) {
       await axios.put(`/alunos/${aluno.id}`, aluno);
     } catch (error) {
       console.log(error);
+      if (error.status === 401) dispatch(actions.loginError());
     }
   };
 
@@ -164,7 +168,7 @@ export default function EditAlunoModal(props) {
                 Cancel
               </button>
               <SubmitButton
-                text={'Salvar'}
+                text={'Salvar Alterações'}
                 type={'submit'}
                 variant={'secondary'}
               />
@@ -181,6 +185,9 @@ export default function EditAlunoModal(props) {
           </label>
           <SubmitButton
             text={'Salvar Foto'}
+            onClick={() => {
+              setShowPhoto(false);
+            }}
             type="submit"
             variant={'secondary'}
           />
