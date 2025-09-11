@@ -2,7 +2,7 @@ import { ContainerMenu, ContainerTitle, Nav } from './styled';
 
 import { IoSchoolOutline } from 'react-icons/io5';
 import { FaHome } from 'react-icons/fa';
-import { PiStudent } from 'react-icons/pi';
+import { RiGroupLine } from 'react-icons/ri';
 import { CiLogin } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
 import { FaRegUser } from 'react-icons/fa';
@@ -35,7 +35,7 @@ export default function Menu() {
               path={'/alunos'}
               text={
                 <>
-                  <PiStudent /> Alunos
+                  <RiGroupLine /> Alunos
                 </>
               }
             />

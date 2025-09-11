@@ -7,7 +7,15 @@ import { ContainerInput, InputButton } from './styled';
 import { FaLock } from 'react-icons/fa';
 import { FaLockOpen } from 'react-icons/fa';
 
-export default function Input({ id, type, placeholder, value, onChange }) {
+export default function Input({
+  id,
+  type,
+  placeholder,
+  value,
+  onChange,
+  minNumber,
+  maxNumber,
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState(type);
 
@@ -31,6 +39,8 @@ export default function Input({ id, type, placeholder, value, onChange }) {
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        min={minNumber}
+        max={maxNumber}
       />
       <InputButton showbutton={id} onClick={handleShowPassword} type="button">
         {showPassword ? <FaLockOpen /> : <FaLock />}

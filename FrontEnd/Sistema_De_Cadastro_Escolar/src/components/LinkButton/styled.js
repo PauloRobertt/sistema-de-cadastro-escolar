@@ -16,15 +16,6 @@ const variantStyles = {
     }
   `,
 
-  tableOp: css`
-    color: black;
-
-    &:hover {
-      color: #2563eb;
-      transition: 300ms color;
-    }
-  `,
-
   menu: css`
     color: black;
     margin-top: 1em;
