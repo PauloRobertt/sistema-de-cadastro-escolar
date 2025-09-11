@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import axios from '../../service/axios';
+import * as actions from '../../store/modules/auth/actions';
 
-//Estilos
+//Styled-Components
 import { ContainerNewAluno, ContainerInput } from './styled';
 
 //Componentes
@@ -11,6 +13,7 @@ import Input from '../../components/Input/input';
 
 export default function AddAlunoModal(props) {
   const [aluno, setAluno] = useState({});
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ export default function AddAlunoModal(props) {
       await axios.post('/alunos/', aluno);
     } catch (error) {
       console.log(error);
+      if (error.status === 401) dispatch(actions.loginError());
     }
   };
 
@@ -35,7 +39,9 @@ export default function AddAlunoModal(props) {
         <div className="containerContent">
           <div className="headerForm">
             <h1>Adicionar Aluno</h1>
-            <p>Informe os dados do aluno abaixo:</p>
+            <p>
+              Preencha os dados do aluno para realizar o cadastro no sistema.
+            </p>
           </div>
           <form onSubmit={handleSubmit} className="formAluno">
             <div className="containerInputs">
@@ -96,7 +102,7 @@ export default function AddAlunoModal(props) {
                 Cancel
               </button>
               <SubmitButton
-                text={'Criar Aluno'}
+                text={'Cadastrar Aluno'}
                 type={'submit'}
                 variant={'secondary'}
               />
