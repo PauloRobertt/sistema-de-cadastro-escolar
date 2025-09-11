@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import * as actions from '../../store/modules/auth/actions';
 import axios from '../../service/axios';
 
-//Estilos
+//Styled-Components
 import { TableAlunos, HeaderContainer } from './styled';
+
+//Estilos
 import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
 
 //Componentes
@@ -23,6 +28,8 @@ export default function AlunosPage() {
   const [showAddAluno, setShowAddAluno] = useState(false);
   const [showEditAluno, setShowEditAluno] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     async function getAlunos() {
       try {
@@ -40,6 +47,7 @@ export default function AlunosPage() {
       await axios.delete(`/alunos/${id}`);
     } catch (error) {
       console.log(error);
+      if (error.status === 401) dispatch(actions.loginError());
     }
   };
 
@@ -54,6 +62,7 @@ export default function AlunosPage() {
       }
     } catch (error) {
       console.log(error);
+      if (error.status === 401) dispatch(actions.loginError());
     }
   };
 
