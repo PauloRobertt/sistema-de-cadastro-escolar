@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 //Styled-Componentes
 import {
@@ -17,6 +18,7 @@ import LinkButton from '../../components/LinkButton';
 import { Container } from '../../styles/GlobalStyles';
 
 import axios from '../../service/axios';
+import { ErrorColor } from '../../config/colors';
 
 export default function index() {
   const [user, setUser] = useState({});
@@ -30,10 +32,23 @@ export default function index() {
   async function register(user) {
     try {
       const response = await axios.post('/users/', user);
-      navigate('/login');
+      navigate('/login', { state: { functionToast: true } });
       return response;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.errors);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
     }
   }
 
@@ -87,6 +102,18 @@ export default function index() {
           </RegisterFormWrapper>
         </RegisterContent>
       </RegisterWrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Container>
   );
 }

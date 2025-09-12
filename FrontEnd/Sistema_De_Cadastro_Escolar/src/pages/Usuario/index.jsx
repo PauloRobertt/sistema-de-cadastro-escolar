@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import axios from '../../service/axios';
 
@@ -26,12 +28,36 @@ import Input from '../../components/Input/input';
 import SubmitButton from '../../components/SubmitButton/index';
 
 import * as action from '../../store/modules/auth/actions';
+import { ErrorColor, primaryColor } from '../../config/colors';
 
 export default function index() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [user, setUser] = useState(
     useSelector((state) => state.auth.authReducer.user),
   );
+
+  const usuarioLogado = () => {
+    toast.success('Usuario logado!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      style: { backgroundColor: primaryColor },
+    });
+  };
+
+  useEffect(() => {
+    if (location.state?.functionToast) {
+      usuarioLogado();
+      navigate('.', { replace: true, state: {} });
+    }
+  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +79,19 @@ export default function index() {
       await axios.delete('/users/');
       dispatch(action.loginError());
     } catch (error) {
-      console.log(error);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
     }
   };
 
@@ -135,6 +173,18 @@ export default function index() {
           </ContainerDeleteUser>
         </ContainerUsuario>
       </ContainerConteudo>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Container>
   );
 }

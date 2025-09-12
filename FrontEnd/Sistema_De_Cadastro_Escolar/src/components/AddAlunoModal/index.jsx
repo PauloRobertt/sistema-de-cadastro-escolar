@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import axios from '../../service/axios';
 import * as actions from '../../store/modules/auth/actions';
+import { ErrorColor, primaryColor } from '../../config/colors';
 
 //Styled-Components
 import { ContainerNewAluno, ContainerInput } from './styled';
@@ -27,8 +29,34 @@ export default function AddAlunoModal(props) {
   const addAluno = async (aluno) => {
     try {
       await axios.post('/alunos/', aluno);
+      toast.success('Aluno cadastrado com sucesso!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: primaryColor },
+      });
+      props.getAluno() + setAluno({});
+      props.getAlunos();
     } catch (error) {
       console.log(error);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
       if (error.status === 401) dispatch(actions.loginError());
     }
   };

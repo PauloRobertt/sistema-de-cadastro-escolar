@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 import * as actions from '../../store/modules/auth/actions';
 import axios from '../../service/axios';
@@ -9,6 +11,7 @@ import { TableAlunos, HeaderContainer } from './styled';
 
 //Estilos
 import { Container, ContainerConteudo } from '../../styles/GlobalStyles';
+import { ErrorColor, primaryColor } from '../../config/colors';
 
 //Componentes
 import Menu from '../../layouts/Menu/input';
@@ -28,25 +31,73 @@ export default function AlunosPage() {
   const [showAddAluno, setShowAddAluno] = useState(false);
   const [showEditAluno, setShowEditAluno] = useState(false);
 
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const usuarioLogado = () => {
+    toast.success('Usuario logado!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      style: { backgroundColor: primaryColor },
+    });
+  };
 
   useEffect(() => {
-    async function getAlunos() {
-      try {
-        const response = await axios.get('/alunos');
-        setAlunos(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+    if (location.state?.functionToast) {
+      usuarioLogado();
+      navigate('.', { replace: true, state: {} });
     }
+  }, [location.state]);
+
+  async function getAlunos() {
+    try {
+      const response = await axios.get('/alunos');
+      setAlunos(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
     getAlunos();
-  }, []);
+  }, [alunos]);
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/alunos/${id}`);
+      toast.success('Aluno deletado com sucesso!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: ErrorColor },
+      });
+      getAlunos();
     } catch (error) {
-      console.log(error);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
       if (error.status === 401) dispatch(actions.loginError());
     }
   };
@@ -87,8 +138,13 @@ export default function AlunosPage() {
         </HeaderContainer>
         {alunos.length > 0 ? (
           <div>
-            <AddAlunoModal getAluno={getAluno} showForm={showAddAluno} />
+            <AddAlunoModal
+              getAlunos={getAlunos}
+              getAluno={getAluno}
+              showForm={showAddAluno}
+            />
             <EditAlunoModal
+              getAlunos={getAlunos}
               getAluno={getAluno}
               dadosAluno={aluno}
               showForm={showEditAluno}
@@ -163,6 +219,18 @@ export default function AlunosPage() {
           </div>
         )}
       </ContainerConteudo>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Container>
   );
 }
