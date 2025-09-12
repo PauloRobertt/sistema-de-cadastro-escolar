@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 //Styled-Components
 import {
@@ -19,13 +20,36 @@ import { Container } from '../../styles/GlobalStyles';
 
 //Actions
 import { loginRequest } from '../../store/modules/auth/actions';
+import { primaryColor } from '../../config/colors';
 
 export default function index() {
   const [user, setUser] = useState({});
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const prevPath = location.state;
+
+  const functionToast = () => {
+    toast.success('Usuario registrado com sucesso!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      style: { backgroundColor: primaryColor },
+    });
+  };
+
+  useEffect(() => {
+    if (location.state?.functionToast) {
+      functionToast();
+      navigate('.', { replace: true, state: {} });
+    }
+  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,7 +95,7 @@ export default function index() {
                 />
               </ContainerInput>
               <LinkButton path="" text={'Esqueceu sua senha?'} />
-              <SubmitButton type="submit" text="Login" />
+              <SubmitButton type="submit" text="Entrar" />
             </form>
             <p>
               Não tem uma conta?
@@ -81,6 +105,18 @@ export default function index() {
         </LoginContent>
         <LoginImage />
       </LoginWrapper>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Container>
   );
 }

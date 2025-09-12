@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import axios from '../../service/axios';
 import * as actions from '../../store/modules/auth/actions';
@@ -10,6 +11,7 @@ import { ContainerEditAluno, ContainerInput, UploadPhotoModal } from './styled';
 //Componentes
 import SubmitButton from '../../components/SubmitButton';
 import Input from '../../components/Input/input';
+import { ErrorColor, primaryColor } from '../../config/colors';
 
 //Icons
 import { FaUserCircle } from 'react-icons/fa';
@@ -34,7 +36,6 @@ export default function EditAlunoModal(props) {
 
   const handleSubmitPhoto = (e) => {
     e.preventDefault();
-    console.log('handle', aluno);
     uploadPhoto(file, aluno.id);
   };
 
@@ -49,8 +50,31 @@ export default function EditAlunoModal(props) {
           'Content-Type': 'multipart/form-data',
         },
       });
+      toast.success('Foto atualizada com sucesso!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: primaryColor },
+      });
     } catch (error) {
-      console.log(error);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
       if (error.status === 401) dispatch(actions.loginError());
     }
   };
@@ -70,8 +94,34 @@ export default function EditAlunoModal(props) {
   const editAluno = async (aluno) => {
     try {
       await axios.put(`/alunos/${aluno.id}`, aluno);
+      toast.success('Aluno editado com sucesso!', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: primaryColor },
+      });
+      props.getAluno(aluno.id) + setAluno({});
+      props.getAlunos();
     } catch (error) {
       console.log(error);
+      error.response.data.errors.map((erro) => {
+        toast.error(erro, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          style: { backgroundColor: ErrorColor },
+        });
+      });
       if (error.status === 401) dispatch(actions.loginError());
     }
   };

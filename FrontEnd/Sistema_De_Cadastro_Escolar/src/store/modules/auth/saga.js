@@ -1,9 +1,12 @@
-import { call, put, all, takeLatest, take } from 'redux-saga/effects';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import * as actions from './actions';
 import * as types from '../types';
 import axios from '../../../service/axios';
 import history from '../../../service/history';
+import { ErrorColor, primaryColor } from '../../../config/colors';
 
 function* loginRequest({ payload }) {
   try {
@@ -11,9 +14,23 @@ function* loginRequest({ payload }) {
     yield put(actions.loginSuccess({ ...response.data }));
 
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-    history.push(payload.prevPath.prevPath);
+    console.log(payload.prevPath.prevPath);
+    history.push(payload.prevPath.prevPath, { functionToast: true });
   } catch (error) {
     console.log(error);
+    error.response.data.errors.map((erro) => {
+      toast.error(erro, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: ErrorColor },
+      });
+    });
     yield put(actions.loginError());
   }
 }
@@ -27,9 +44,32 @@ function* editRequest({ payload }) {
       email,
       password,
     });
+    toast.success('Usuario editado com sucesso!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      style: { backgroundColor: primaryColor },
+    });
     yield put(actions.editSuccess({ nome, email }));
   } catch (error) {
-    console.log(error);
+    error.response.data.errors.map((erro) => {
+      toast.error(erro, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: ErrorColor },
+      });
+    });
     if (error.status === 401) {
       yield put(actions.loginError());
     }
