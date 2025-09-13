@@ -18,6 +18,10 @@ import SubmitButton from '../../components/SubmitButton';
 import LinkButton from '../../components/LinkButton';
 import { Container } from '../../styles/GlobalStyles';
 
+//Icons
+import { MdOutlineEmail } from 'react-icons/md';
+import { MdLockOutline } from 'react-icons/md';
+
 //Actions
 import { loginRequest } from '../../store/modules/auth/actions';
 import { primaryColor } from '../../config/colors';
@@ -75,7 +79,9 @@ export default function index() {
             <h3>Digite seu e-mail e senha para acessar sua conta.</h3>
             <form onSubmit={handleSubmit} method="post">
               <ContainerInput>
-                <label>E-mail</label>
+                <label>
+                  <MdOutlineEmail size={'1.3em'} /> E-mail
+                </label>
                 <Input
                   id="email"
                   label="E-mail"
@@ -85,7 +91,9 @@ export default function index() {
                 />
               </ContainerInput>
               <ContainerInput>
-                <label>Senha</label>
+                <label>
+                  <MdLockOutline size={'1.3em'} /> Senha
+                </label>
                 <Input
                   id="password"
                   label="Senha"
