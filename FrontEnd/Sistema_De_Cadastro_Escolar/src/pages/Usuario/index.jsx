@@ -18,9 +18,9 @@ import {
 //Icons
 import { MdDelete } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
-import { MdEmail } from 'react-icons/md';
-import { FaRegUser } from 'react-icons/fa';
-import { FaLock } from 'react-icons/fa';
+import { FiUser } from 'react-icons/fi';
+import { MdOutlineEmail } from 'react-icons/md';
+import { MdLockOutline } from 'react-icons/md';
 
 //Componentes
 import Menu from '../../layouts/Menu/input';
@@ -123,7 +123,7 @@ export default function index() {
               </div>
               <ContainerInput>
                 <label>
-                  <FaRegUser /> Nome
+                  <FiUser size={'1.3em'} /> Nome
                 </label>
                 <Input
                   id="userNome"
@@ -136,7 +136,7 @@ export default function index() {
               </ContainerInput>
               <ContainerInput>
                 <label>
-                  <MdEmail /> E-mail
+                  <MdOutlineEmail size={'1.3em'} /> E-mail
                 </label>
                 <Input
                   id="userEmail"
@@ -149,7 +149,7 @@ export default function index() {
               </ContainerInput>
               <ContainerInput>
                 <label>
-                  <FaLock /> Senha
+                  <MdLockOutline size={'1.3em'} /> Senha
                 </label>
                 <Input
                   id="password"

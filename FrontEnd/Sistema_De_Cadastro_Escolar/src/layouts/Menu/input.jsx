@@ -1,11 +1,13 @@
 import { ContainerMenu, ContainerTitle, Nav } from './styled';
 
+//Icons
 import { IoSchoolOutline } from 'react-icons/io5';
-import { FaHome } from 'react-icons/fa';
-import { RiGroupLine } from 'react-icons/ri';
 import { CiLogin } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
-import { FaRegUser } from 'react-icons/fa';
+
+import { FiUsers } from 'react-icons/fi';
+import { FiUser } from 'react-icons/fi';
+import { IoHomeOutline } from 'react-icons/io5';
 
 import LinkButton from '../../components/LinkButton';
 
@@ -24,7 +26,7 @@ export default function Menu() {
               path={'/'}
               text={
                 <>
-                  <FaHome /> Home
+                  <IoHomeOutline size={'1.3em'} /> Home
                 </>
               }
             />
@@ -35,7 +37,7 @@ export default function Menu() {
               path={'/alunos'}
               text={
                 <>
-                  <RiGroupLine /> Alunos
+                  <FiUsers size={'1.3em'} /> Alunos
                 </>
               }
             />
@@ -46,7 +48,7 @@ export default function Menu() {
               path={'/usuario'}
               text={
                 <>
-                  <FaRegUser /> Usuario
+                  <FiUser size={'1.3em'} /> Usuario
                 </>
               }
             />
@@ -58,8 +60,8 @@ export default function Menu() {
             path={''}
             text={
               <>
-                <CiLogout />
-                Log Out // <CiLogin /> Login
+                <CiLogout size={'1.3em'} />
+                Log Out // <CiLogin size={'1.3em'} /> Login
               </>
             }
           />

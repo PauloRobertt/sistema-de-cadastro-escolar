@@ -25,9 +25,11 @@ export const ContainerInput = styled.div`
 
 export const InputButton = styled.button`
   background-color: ${inputColor};
-  display: ${(props) => (props.showbutton === 'password' ? 'block' : 'none')};
+  display: ${(props) => (props.showbutton === 'password' ? 'flex' : 'none')};
   border: none;
   font-size: 1em;
   padding: 0.5em;
   margin-right: 0.2em;
+  justify-content: center;
+  align-items: center;
 `;

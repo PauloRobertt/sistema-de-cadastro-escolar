@@ -64,4 +64,11 @@ export const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+
+  label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+  }
 `;
