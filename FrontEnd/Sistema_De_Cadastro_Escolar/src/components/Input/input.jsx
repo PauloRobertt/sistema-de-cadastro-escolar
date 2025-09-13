@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { ContainerInput, InputButton } from './styled';
 
 //Icons
-import { FaLock } from 'react-icons/fa';
-import { FaLockOpen } from 'react-icons/fa';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { IoEyeOffOutline } from 'react-icons/io5';
 
 export default function Input({
   id,
@@ -43,7 +43,11 @@ export default function Input({
         max={maxNumber}
       />
       <InputButton showbutton={id} onClick={handleShowPassword} type="button">
-        {showPassword ? <FaLockOpen /> : <FaLock />}
+        {showPassword ? (
+          <MdOutlineRemoveRedEye size={'1.3em'} />
+        ) : (
+          <IoEyeOffOutline size={'1.3em'} />
+        )}
       </InputButton>
     </ContainerInput>
   );
