@@ -32,7 +32,7 @@ export default function index() {
   async function register(user) {
     try {
       const response = await axios.post('/users/', user);
-      navigate('/login', { state: { functionToast: true } });
+      navigate('/login', { state: { usuarioRegistradoToast: true } });
       return response;
     } catch (error) {
       console.log(error.response.data.errors);

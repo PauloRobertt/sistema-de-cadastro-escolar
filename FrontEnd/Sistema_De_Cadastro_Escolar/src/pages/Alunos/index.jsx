@@ -50,7 +50,7 @@ export default function AlunosPage() {
   };
 
   useEffect(() => {
-    if (location.state?.functionToast) {
+    if (location.state?.usuarioLogadoToast) {
       usuarioLogado();
       navigate('.', { replace: true, state: {} });
     }
