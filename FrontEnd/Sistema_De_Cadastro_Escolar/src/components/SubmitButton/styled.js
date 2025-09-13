@@ -64,6 +64,26 @@ const variantStyles = {
       border: 1px solid #bebebeff;
     }
   `,
+
+  loggout: css`
+    width: 100%;
+    border: none;
+    color: black;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: white;
+    font-size: 1em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+    transition: background-color 300ms ease-in-out;
+
+    &:hover {
+      background-color: ${secundaryColor};
+      color: white;
+    }
+  `,
 };
 
 export const Button = styled.button`
