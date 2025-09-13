@@ -49,7 +49,7 @@ export default function index() {
   };
 
   useEffect(() => {
-    if (location.state?.functionToast) {
+    if (location.state?.usuarioRegistradoToast) {
       functionToast();
       navigate('.', { replace: true, state: {} });
     }
