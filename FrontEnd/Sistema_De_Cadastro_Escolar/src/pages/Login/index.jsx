@@ -32,7 +32,7 @@ export default function index() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const prevPath = location.state;
+  const prevPath = location.state || '/';
 
   const functionToast = () => {
     toast.success('Usuario registrado com sucesso!', {

@@ -14,8 +14,7 @@ function* loginRequest({ payload }) {
     yield put(actions.loginSuccess({ ...response.data }));
 
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-    console.log(payload.prevPath.prevPath);
-    history.push(payload.prevPath.prevPath, { usuarioLogadoToast: true });
+    history.push(payload.prevPath, { usuarioLogadoToast: true });
   } catch (error) {
     console.log(error);
     error.response.data.errors.map((erro) => {
