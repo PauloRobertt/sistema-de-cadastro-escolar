@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
 //Styled-Components
@@ -32,7 +32,17 @@ export default function index() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const prevPath = location.state || '/';
+  const prevPath = location.state?.prevPath || '/alunos';
+
+  const usuarioLogado = useSelector(
+    (state) => state.auth.authReducer.isLoggedIn,
+  );
+
+  useEffect(() => {
+    if (usuarioLogado) {
+      navigate(prevPath);
+    }
+  }, [usuarioLogado]);
 
   const functionToast = () => {
     toast.success('Usuario registrado com sucesso!', {

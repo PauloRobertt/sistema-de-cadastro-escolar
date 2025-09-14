@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 //Styled-Componentes
 import {
@@ -23,6 +24,16 @@ import { ErrorColor } from '../../config/colors';
 export default function index() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+
+  const usuarioLogado = useSelector(
+    (state) => state.auth.authReducer.isLoggedIn,
+  );
+
+  useEffect(() => {
+    if (usuarioLogado) {
+      navigate('/alunos');
+    }
+  }, [usuarioLogado]);
 
   const submit = (e) => {
     e.preventDefault();
