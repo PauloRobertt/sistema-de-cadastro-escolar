@@ -35,7 +35,8 @@ const variantStyles = {
   `,
 
   adicionarAluno: css`
-    width: 15em;
+    width: 100%;
+    height: 100%;
     background-color: ${primaryColor};
     transition: background-color 300ms ease-in-out;
     color: #ffff;

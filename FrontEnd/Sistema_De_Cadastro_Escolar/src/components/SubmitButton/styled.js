@@ -40,6 +40,7 @@ const variantStyles = {
     padding: 0.8em 1em;
     border: none;
     border-radius: 0.5em;
+    font-weight: bold;
 
     &:hover {
       background-color: ${primaryDarkColor};
