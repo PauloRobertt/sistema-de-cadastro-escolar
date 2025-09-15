@@ -62,11 +62,6 @@ export default class Aluno extends Model {
             },
           },
         },
-
-        foto: {
-          type: Sequelize.STRING,
-          defaultValue: '',
-        },
       },
       {
         sequelize,
