@@ -6,4 +6,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 
+export const EDIT_SUCESS = 'EDIT_SUCESS';
+export const EDIT_REQUEST = 'EDIT_REQUEST';
+export const EDIT_FAILURE = 'EDIT_FAILURE';
+
 export const PERSIST_REHYDRATE = 'persist/REHYDRATE';

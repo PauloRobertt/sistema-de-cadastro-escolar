@@ -1,22 +1,77 @@
-import { call, put, all, takeLatest, take } from 'redux-saga/effects';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import * as actions from './actions';
 import * as types from '../types';
 import axios from '../../../service/axios';
 import history from '../../../service/history';
+import { ErrorColor, primaryColor } from '../../../config/colors';
 
 function* loginRequest({ payload }) {
   try {
-    console.log('Payload ', payload);
     const response = yield call(axios.post, '/tokens/', payload);
-    console.log('Saga Response', response);
     yield put(actions.loginSuccess({ ...response.data }));
 
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-    history.push(payload.prevPath.prevPath);
+    history.push(payload.prevPath, { usuarioLogadoToast: true });
   } catch (error) {
     console.log(error);
+    error.response.data.errors.map((erro) => {
+      toast.error(erro, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: ErrorColor },
+      });
+    });
     yield put(actions.loginError());
+  }
+}
+
+function* editRequest({ payload }) {
+  const { nome, email, password } = payload;
+
+  try {
+    yield call(axios.put, '/users/', {
+      nome,
+      email,
+      password,
+    });
+    toast.success('Usuario editado com sucesso!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+      style: { backgroundColor: primaryColor },
+    });
+    yield put(actions.editSuccess({ nome, email }));
+  } catch (error) {
+    error.response.data.errors.map((erro) => {
+      toast.error(erro, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        style: { backgroundColor: ErrorColor },
+      });
+    });
+    if (error.status === 401) {
+      yield put(actions.loginError());
+    }
   }
 }
 
@@ -30,5 +85,6 @@ function persistRequest({ payload }) {
 
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
+  takeLatest(types.EDIT_REQUEST, editRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRequest),
 ]);

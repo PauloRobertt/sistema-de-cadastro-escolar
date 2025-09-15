@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import { ContainerInput, DivInput, InputButton } from './styled';
-import { FaLock } from 'react-icons/fa';
-import { FaLockOpen } from 'react-icons/fa';
+
+//Componentes
+import { ContainerInput, InputButton } from './styled';
+
+//Icons
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { IoEyeOffOutline } from 'react-icons/io5';
 
 export default function Input({
   id,
-  label,
   type,
   placeholder,
+  value,
   onChange,
-  minLength,
-  maxLength,
+  minNumber,
+  maxNumber,
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState(type);
@@ -29,20 +33,22 @@ export default function Input({
 
   return (
     <ContainerInput>
-      <label>{label}</label>
-      <DivInput>
-        <input
-          id={id}
-          type={input}
-          placeholder={placeholder}
-          onChange={onChange}
-          minLength={minLength}
-          maxLength={maxLength}
-        />
-        <InputButton showbutton={id} onClick={handleShowPassword} type="button">
-          {showPassword ? <FaLockOpen /> : <FaLock />}
-        </InputButton>
-      </DivInput>
+      <input
+        id={id}
+        type={input}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        min={minNumber}
+        max={maxNumber}
+      />
+      <InputButton showbutton={id} onClick={handleShowPassword} type="button">
+        {showPassword ? (
+          <MdOutlineRemoveRedEye size={'1.3em'} />
+        ) : (
+          <IoEyeOffOutline size={'1.3em'} />
+        )}
+      </InputButton>
     </ContainerInput>
   );
 }

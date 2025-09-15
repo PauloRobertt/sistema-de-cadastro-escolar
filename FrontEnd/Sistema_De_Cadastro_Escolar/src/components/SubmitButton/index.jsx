@@ -1,5 +1,9 @@
 import { Button } from './styled';
 
-export default function SubmitButton({ type, text }) {
-  return <Button type={type}>{text}</Button>;
+export default function SubmitButton({ type, text, variant, onClick }) {
+  return (
+    <Button onClick={onClick} variant={variant} type={type}>
+      {text}
+    </Button>
+  );
 }

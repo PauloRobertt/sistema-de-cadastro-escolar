@@ -2,12 +2,7 @@ import styled from 'styled-components';
 import { inputColor, inputTextColor } from '../../config/colors';
 
 export const ContainerInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-`;
-
-export const DivInput = styled.div`
+  width: 100%;
   background-color: ${inputColor};
   display: flex;
   justify-content: flex-start;
@@ -30,9 +25,11 @@ export const DivInput = styled.div`
 
 export const InputButton = styled.button`
   background-color: ${inputColor};
-  display: ${(props) => (props.showbutton === 'password' ? 'block' : 'none')};
+  display: ${(props) => (props.showbutton === 'password' ? 'flex' : 'none')};
   border: none;
   font-size: 1em;
   padding: 0.5em;
   margin-right: 0.2em;
+  justify-content: center;
+  align-items: center;
 `;
