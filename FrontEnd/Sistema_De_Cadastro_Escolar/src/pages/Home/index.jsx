@@ -25,6 +25,7 @@ import {
 
 // Service
 import axios from '../../service/axios';
+import { OrganizarImagens } from '../../assets/index';
 
 export default function index() {
   const date = new Date();
@@ -119,18 +120,19 @@ export default function index() {
         </Container>
       ) : (
         <Container>
-          <Menu />
           <ContainerHomeNaoLogado>
-            <div className="header">
-              <h1>Sistema de Cadastro Escolar</h1>
+            <div className="banner">
+              <h1>
+                Transforme a gestão da sua <span>instituição educacional</span>
+              </h1>
               <p>
-                Uma plataform para gerenciamento de alunos de forma simples e
-                eficiente.
+                Uma plataforma para melhorar seu gerenciamento de alunos de
+                forma simples e eficiente.
               </p>
               <div className="buttonAcessarSistema">
                 <LinkButton
                   variant={'adicionarAluno'}
-                  path={'/alunos'}
+                  path={'/login'}
                   text={
                     <>
                       Acessar Sistema <FaArrowRight size={'1em'} />
@@ -139,15 +141,12 @@ export default function index() {
                 />
               </div>
             </div>
-            <div className="funcionalidades">
-              <div className="header">
-                <h2>Funcionalidades Principais</h2>
-                <p>
-                  Tudo que você precisa para uma gestão educacional completa e
-                  eficiente
-                </p>
+            <div className="containerFuncionalidades">
+              <div>
+                <h1>Funcionalidades Principais</h1>
+                <p>Cadastro completo de alunos e upload de suas fotos.</p>
               </div>
-              <div className="cardsFuncionalidades">
+              <div className="containerCards">
                 <div className="cardFuncionalidade">
                   <div>
                     <FiUsers size={'3em'} />

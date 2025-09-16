@@ -97,31 +97,60 @@ export const ContainerHomeNaoLogado = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  gap: 3em;
+  align-items: center;
+  gap: 1em;
   background-color: #ffff;
-  margin-left: 18em;
   width: 100%;
   height: 100%;
-  padding: 2em;
   border-radius: 1em;
 
   p {
     color: ${colors.textColor};
   }
 
-  .header {
+  .banner {
+    border-radius: 1em;
+    width: 100%;
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1em;
-    width: 100%;
     text-align: center;
+    gap: 0.5em;
 
     h1 {
-      font-size: 2.5em;
+      span {
+        color: ${colors.primaryColor};
+      }
+      font-size: 4em;
+      width: 900px;
     }
+
+    p {
+      width: 500px;
+      font-size: 1.2em;
+    }
+  }
+
+  .conteudoBanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1em;
+    width: 100%;
+    height: 100%;
+  }
+
+  .figureBanner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .figureBanner img {
+    width: 100%;
+    height: 100%;
   }
 
   .buttonAcessarSistema {
@@ -130,8 +159,7 @@ export const ContainerHomeNaoLogado = styled.div`
   }
 
   .cardFuncionalidade {
-    border: 1px solid #eee;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    border: 2px solid #eee;
     background-color: white;
     border-radius: 0.5em;
     padding: 1em;
@@ -144,7 +172,11 @@ export const ContainerHomeNaoLogado = styled.div`
     height: 200px;
   }
 
-  .cardsFuncionalidades {
+  .cardFuncionalidade:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  }
+
+  .containerCards {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -152,13 +184,14 @@ export const ContainerHomeNaoLogado = styled.div`
     gap: 2em;
   }
 
-  .funcionalidades {
+  .containerFuncionalidades {
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5em;
+    gap: 1em;
+    padding: 1em;
   }
 `;
