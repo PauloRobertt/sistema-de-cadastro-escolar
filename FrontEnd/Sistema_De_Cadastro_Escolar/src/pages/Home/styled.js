@@ -34,8 +34,8 @@ export const ContainerCards = styled.div`
 `;
 
 export const Cards = styled.div`
-  border: 1px solid #eee;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  border: 2px solid #eee;
+
   background-color: white;
   border-radius: 1em;
   padding: 1em;
@@ -57,9 +57,9 @@ export const Cards = styled.div`
 
 export const ContainerDicasDoSistema = styled.div`
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 1em;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
   background-color: white;
   padding: 1.5em;
   display: flex;
@@ -75,9 +75,8 @@ export const ContainerDicasDoSistema = styled.div`
 
 export const ContainerAtalhos = styled.div`
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 1em;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
 
   background-color: white;
   padding: 1.5em;
@@ -173,7 +172,6 @@ export const ContainerHomeNaoLogado = styled.div`
   }
 
   .cardFuncionalidade:hover {
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
   }
 
   .containerCards {
