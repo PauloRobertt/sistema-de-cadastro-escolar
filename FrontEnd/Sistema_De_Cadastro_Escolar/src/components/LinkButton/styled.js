@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {
   primaryColor,
+  primaryDarkColor,
   secundaryColor,
   secundaryDarkColor,
 } from '../../config/colors';
@@ -30,6 +31,27 @@ const variantStyles = {
     &:hover {
       background-color: ${primaryColor};
       color: white;
+    }
+  `,
+
+  adicionarAluno: css`
+    width: 100%;
+    height: 100%;
+    background-color: ${primaryColor};
+    transition: background-color 300ms ease-in-out;
+    color: #ffff;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.5em;
+    font-weight: bold;
+
+    &:hover {
+      background-color: ${primaryDarkColor};
     }
   `,
 
