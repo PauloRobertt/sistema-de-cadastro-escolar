@@ -3,18 +3,18 @@ import { inputColor, inputTextColor } from '../../config/colors';
 
 export const ContainerInput = styled.div`
   width: 100%;
-  background-color: ${inputColor};
+  background-color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 0.5em;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  border-radius: 1em;
+  border: 2px solid #eee;
 
   input {
     padding: 1em;
     border: none;
-    border-radius: 0.5em;
-    background-color: ${inputColor};
+    border-radius: 1em;
+    background-color: white;
     width: 100%;
   }
 
@@ -24,7 +24,7 @@ export const ContainerInput = styled.div`
 `;
 
 export const InputButton = styled.button`
-  background-color: ${inputColor};
+  background-color: white;
   display: ${(props) => (props.showbutton === 'password' ? 'flex' : 'none')};
   border: none;
   font-size: 1em;
