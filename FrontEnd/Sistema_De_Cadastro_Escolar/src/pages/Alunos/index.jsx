@@ -31,6 +31,8 @@ export default function AlunosPage() {
   const [showAddAluno, setShowAddAluno] = useState(false);
   const [showEditAluno, setShowEditAluno] = useState(false);
 
+  console.log(alunos);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,7 +69,7 @@ export default function AlunosPage() {
 
   useEffect(() => {
     getAlunos();
-  }, [alunos]);
+  }, []);
 
   const handleDelete = async (id) => {
     try {
