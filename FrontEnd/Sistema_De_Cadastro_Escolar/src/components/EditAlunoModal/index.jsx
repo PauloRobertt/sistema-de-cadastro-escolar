@@ -61,6 +61,7 @@ export default function EditAlunoModal(props) {
         theme: 'colored',
         style: { backgroundColor: primaryColor },
       });
+      props.getAlunos();
     } catch (error) {
       error.response.data.errors.map((erro) => {
         toast.error(erro, {
@@ -106,6 +107,7 @@ export default function EditAlunoModal(props) {
         style: { backgroundColor: primaryColor },
       });
       props.getAluno(aluno.id) + setAluno({});
+      showPhoto ? setShowPhoto(false) : setShowPhoto(true);
       props.getAlunos();
     } catch (error) {
       console.log(error);
@@ -212,7 +214,9 @@ export default function EditAlunoModal(props) {
                 className="buttonCancel"
                 type="button"
                 onClick={() => {
-                  props.getAluno(aluno.id) + setAluno({});
+                  props.getAluno(aluno.id) + setAluno({}) + showPhoto
+                    ? setShowPhoto(false)
+                    : setShowPhoto(true);
                 }}
               >
                 Cancel
@@ -236,7 +240,7 @@ export default function EditAlunoModal(props) {
           <SubmitButton
             text={'Salvar Foto'}
             onClick={() => {
-              setShowPhoto(false);
+              setShowPhoto(false) + setFoto();
             }}
             type="submit"
             variant={'secondary'}
