@@ -1,24 +1,36 @@
+import { Op } from 'sequelize';
 import Aluno from '../models/Aluno.js';
 import Photo from '../models/Photo.js';
 class AlunoController {
   async index(req, res) {
+    let where = {};
+
+    if (req.query.nomeBusca) {
+      where.nome = { [Op.startsWith]: `%${req.query.nomeBusca}` };
+    }
+
     try {
       const alunos = await Aluno.findAll({
         attributes: ['id', 'nome', 'sobrenome', 'email', 'idade'],
-        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
-        include: [{
-          model: Photo,
-          attributes: ['url', 'filename'],
-        }],
+        order: [
+          ['id', 'DESC'],
+          [Photo, 'id', 'DESC'],
+        ],
+        include: [
+          {
+            model: Photo,
+            attributes: ['url', 'filename'],
+          },
+        ],
+        where,
       });
       res.status(200).json(alunos);
     } catch (e) {
-      console.log(e);
-      /*
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
-      */
     }
   }
 
@@ -32,11 +44,16 @@ class AlunoController {
 
       const aluno = await Aluno.findByPk(req.params.id, {
         attributes: ['id', 'nome', 'sobrenome', 'email', 'idade'],
-        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
-        include: [{
-          model: Photo,
-          attributes: ['url', 'filename'],
-        }],
+        order: [
+          ['id', 'DESC'],
+          [Photo, 'id', 'DESC'],
+        ],
+        include: [
+          {
+            model: Photo,
+            attributes: ['url', 'filename'],
+          },
+        ],
       });
 
       if (!aluno) {
@@ -48,7 +65,9 @@ class AlunoController {
       res.status(200).json(aluno);
     } catch (e) {
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
     }
   }
@@ -59,7 +78,9 @@ class AlunoController {
       res.status(200).json(novoAluno);
     } catch (e) {
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
     }
   }
@@ -84,7 +105,9 @@ class AlunoController {
       res.status(200).json({ alunoAtualizado });
     } catch (e) {
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
     }
   }
@@ -109,7 +132,9 @@ class AlunoController {
       res.json(aluno);
     } catch (e) {
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
     }
   }
