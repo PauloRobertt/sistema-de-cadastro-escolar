@@ -18,6 +18,7 @@ import Menu from '../../layouts/Menu/input';
 import SubmitButton from '../../components/SubmitButton';
 import EditAlunoModal from '../../components/EditAlunoModal';
 import AddAlunoModal from '../../components/AddAlunoModal';
+import Search from '../../components/Search';
 
 //Icons
 import { FaUserCircle } from 'react-icons/fa';
@@ -30,8 +31,7 @@ export default function AlunosPage() {
   const [aluno, setAluno] = useState({});
   const [showAddAluno, setShowAddAluno] = useState(false);
   const [showEditAluno, setShowEditAluno] = useState(false);
-
-  console.log(alunos);
+  const [textSearch, setTextSearch] = useState('');
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -60,8 +60,10 @@ export default function AlunosPage() {
 
   async function getAlunos() {
     try {
-      const response = await axios.get('/alunos');
-      setAlunos(response.data);
+      const { data } = await axios.get('/alunos', {
+        params: { nomeBusca: textSearch },
+      });
+      setAlunos(data);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +71,7 @@ export default function AlunosPage() {
 
   useEffect(() => {
     getAlunos();
-  }, []);
+  }, [textSearch]);
 
   const handleDelete = async (id) => {
     try {
@@ -119,6 +121,10 @@ export default function AlunosPage() {
     }
   };
 
+  const buscarAluno = (text) => {
+    setTextSearch(text);
+  };
+
   return (
     <Container>
       <Menu />
@@ -138,6 +144,7 @@ export default function AlunosPage() {
             variant={'secondary'}
           />
         </HeaderContainer>
+        <Search buscarAluno={buscarAluno} />
         {alunos.length > 0 ? (
           <div>
             <AddAlunoModal
@@ -207,7 +214,11 @@ export default function AlunosPage() {
           </div>
         ) : (
           <div>
-            <AddAlunoModal getAluno={getAluno} showForm={showAddAluno} />
+            <AddAlunoModal
+              getAlunos={getAlunos}
+              getAluno={getAluno}
+              showForm={showAddAluno}
+            />
 
             <TableAlunos>
               <tbody>
