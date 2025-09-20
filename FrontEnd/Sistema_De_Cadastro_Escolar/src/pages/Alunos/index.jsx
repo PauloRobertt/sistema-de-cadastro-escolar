@@ -18,7 +18,7 @@ import Menu from '../../layouts/Menu/input';
 import SubmitButton from '../../components/SubmitButton';
 import EditAlunoModal from '../../components/EditAlunoModal';
 import AddAlunoModal from '../../components/AddAlunoModal';
-import Search from '../../components/search';
+import Search from '../../components/Search';
 
 //Icons
 import { FaUserCircle } from 'react-icons/fa';
