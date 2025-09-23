@@ -3,34 +3,37 @@ import appConfig from '../config/appConfig.js';
 
 export default class Photo extends Model {
   static init(sequelize) {
-    super.init({
-      originalname: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-        validate: {
-          notEmpty: {
-            msg: 'Campo OriginalName não pode ficar vazio!',
+    super.init(
+      {
+        originalname: {
+          type: Sequelize.STRING,
+          defaultValue: '',
+          validate: {
+            notEmpty: {
+              msg: 'Campo OriginalName não pode ficar vazio!',
+            },
+          },
+        },
+        filename: {
+          type: Sequelize.STRING,
+          defaultValue: '',
+          validate: {
+            notEmpty: {
+              msg: 'Campo FileName não pode ficar vazio!',
+            },
+          },
+        },
+        url: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return `${appConfig.url}/images/${this.getDataValue('filename')}`;
           },
         },
       },
-      filename: {
-        type: Sequelize.STRING,
-        defaultValue: '',
-        validate: {
-          notEmpty: {
-            msg: 'Campo FileName não pode ficar vazio!',
-          },
-        },
+      {
+        sequelize,
       },
-      url: {
-        type: Sequelize.VIRTUAL,
-        get() {
-          return `${appConfig.url}/images/${this.getDataValue('filename')}`;
-        },
-      },
-    }, {
-      sequelize,
-    });
+    );
 
     return this;
   }
