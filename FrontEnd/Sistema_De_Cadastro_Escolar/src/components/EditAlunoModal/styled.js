@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
 export const ContainerEditAluno = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: ${({ showEditAluno }) => (showEditAluno ? 'flex' : 'none')};

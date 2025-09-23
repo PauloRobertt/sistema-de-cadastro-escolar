@@ -31,7 +31,6 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.div`
-  background-color: ${backgroundColor};
   width: 100%;
   height: 100%;
   padding: 0.5em;
@@ -49,6 +48,5 @@ export const ContainerConteudo = styled.div`
   margin-left: 18em;
   width: 100%;
   height: 100%;
-  padding: 2em;
-  border-radius: 1em;
+  padding: 1em;
 `;
