@@ -16,7 +16,7 @@ export default class Aluno extends Model {
               msg: 'Campo nome deve ter entre 3 e 255 caracteres!',
             },
             is: {
-              args: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{6,}$/,
+              args: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/,
               msg: 'Campo nome deve conter apenas letras!',
             },
           },
@@ -34,7 +34,7 @@ export default class Aluno extends Model {
               msg: 'Campo sobrenome deve ter entre 3 e 255 caracteres!',
             },
             is: {
-              args: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{6,}$/,
+              args: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/,
               msg: 'Campo sobrenome deve conter apenas letras!',
             },
           },
