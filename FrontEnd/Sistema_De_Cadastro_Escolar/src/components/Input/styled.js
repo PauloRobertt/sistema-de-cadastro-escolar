@@ -10,6 +10,10 @@ export const ContainerInput = styled.div`
   border-radius: 1em;
   border: 2px solid #eee;
 
+  &:focus-within {
+    border: 2px solid #5a5a5aff;
+  }
+
   input {
     padding: 1em;
     border: none;
@@ -29,6 +33,7 @@ export const InputButton = styled.button`
   border: none;
   font-size: 1em;
   padding: 0.5em;
+  border-radius: 1em;
   margin-right: 0.2em;
   justify-content: center;
   align-items: center;
