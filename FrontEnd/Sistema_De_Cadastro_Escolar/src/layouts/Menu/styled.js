@@ -9,8 +9,6 @@ export const ContainerMenu = styled.div`
   justify-content: center;
   align-items: center;
   border-right: 1px solid #eee;
-  border-top-right-radius: 1em;
-  border-bottom-right-radius: 1em;
   padding: 1em;
   background-color: white;
   position: fixed;
@@ -25,7 +23,6 @@ export const ContainerTitle = styled.div`
   padding: 1em;
   gap: 0.5em;
   font-size: 1.2em;
-  border-bottom: 1px solid #eee;
 `;
 
 export const Nav = styled.nav`
@@ -36,6 +33,15 @@ export const Nav = styled.nav`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+
+  ul:first-child {
+    border-top: 1px solid #eee;
+  }
+
+  ul:last-child {
+    border-top: 1px solid #eee;
+    padding-top: 0.5em;
+  }
 
   ul {
     width: 100%;
