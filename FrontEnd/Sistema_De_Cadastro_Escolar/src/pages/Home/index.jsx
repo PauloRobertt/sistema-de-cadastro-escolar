@@ -7,7 +7,6 @@ import Menu from '../../layouts/Menu/input';
 import LinkButton from '../../components/LinkButton';
 
 // Icons
-import { IoIosAdd } from 'react-icons/io';
 import { FiUser, FiUserPlus, FiUsers } from 'react-icons/fi';
 import { FaPhotoVideo, FaArrowRight } from 'react-icons/fa';
 
@@ -25,7 +24,6 @@ import {
 
 // Service
 import axios from '../../service/axios';
-import { OrganizarImagens } from '../../assets/index';
 
 export default function index() {
   const date = new Date();
@@ -74,7 +72,7 @@ export default function index() {
               <Cards>
                 <FiUser size={'1.5em'} />
                 <div>
-                  <h3>Último aluno Cadastro / Editado</h3>
+                  <h3>Último aluno Cadastro</h3>
                   {!alunos[0] ? (
                     <p>Nenhum aluno cadastrado</p>
                   ) : (
@@ -93,7 +91,7 @@ export default function index() {
                 </li>
                 <li>
                   Use "Alunos" no menu lateral para visualizar, editar ou
-                  deletar alunos existentes
+                  deletar alunos existentes.
                 </li>
                 <li>
                   Utilize a seção "Usuario" no menu lateral caso queira
