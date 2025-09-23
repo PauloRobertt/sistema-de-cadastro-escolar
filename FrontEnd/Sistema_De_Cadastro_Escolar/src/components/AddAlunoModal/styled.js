@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
 export const ContainerNewAluno = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: ${({ showAddAluno }) => (showAddAluno ? 'flex' : 'none')};
