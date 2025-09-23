@@ -8,20 +8,20 @@ class TokenController {
 
       if (!emailBody || !passwordBody) {
         return res.status(400).json({
-          errors: ['Credenciais invalidas!', '1'],
+          errors: ['Credenciais invalidas!'],
         });
       }
 
       const user = await User.findOne({ where: { email: emailBody } });
       if (!user) {
         return res.status(401).json({
-          errors: ['Credenciais invalidas!', '2'],
+          errors: ['Credenciais invalidas!'],
         });
       }
 
       if (!(await user.passwordIsValid(passwordBody))) {
         return res.status(401).json({
-          errors: ['Credenciais invalidas!', '3'],
+          errors: ['Credenciais invalidas!'],
         });
       }
 
@@ -41,7 +41,9 @@ class TokenController {
       });
     } catch (e) {
       res.status(400).json({
-        errors: e.errors.map((erros) => { return erros.message; }),
+        errors: e.errors.map((erros) => {
+          return erros.message;
+        }),
       });
     }
   }
