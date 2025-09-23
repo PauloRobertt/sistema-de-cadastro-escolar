@@ -11,8 +11,8 @@ export const ContainerHome = styled.div`
   margin-left: 18em;
   width: 100%;
   height: 100%;
-  padding: 2em;
-  border-radius: 1em;
+  padding: 1em;
+
   p {
     color: ${colors.textColor};
   }
