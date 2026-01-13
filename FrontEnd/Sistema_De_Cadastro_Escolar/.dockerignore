@@ -1,7 +1,10 @@
 node_modules/
+src/
 .git/
 .gitignore
 README.md
 LICENSE
 nodemon.json
+.editorconfig
+.prettierrc
 eslint.config.mjs
