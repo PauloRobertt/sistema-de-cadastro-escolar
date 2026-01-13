@@ -1,0 +1,45 @@
+import * as types from '../types';
+
+const initialState = {
+  isLoggedIn: false,
+  token: false,
+  user: {},
+  isLoading: false,
+};
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case types.LOGIN_SUCCESS: {
+      const newState = { ...state };
+      newState.isLoggedIn = true;
+      newState.token = action.payload.token;
+      newState.user = action.payload.user;
+
+      return newState;
+    }
+
+    case types.LOGIN_ERROR: {
+      const newState = { ...initialState };
+      return newState;
+    }
+
+    case types.EDIT_SUCESS: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          userNome: action.payload.nome,
+          userEmail: action.payload.email,
+        },
+      };
+    }
+
+    case types.EDIT_FAILURE: {
+      const newState = { ...state };
+      return newState;
+    }
+
+    default:
+      return state;
+  }
+}
