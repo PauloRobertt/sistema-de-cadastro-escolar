@@ -11,7 +11,7 @@ import photoRoutes from './routes/photoRoutes.js';
 
 import './database/index.js';
 
-const __dirname = path.resolve();
+const dirname = typeof __dirname !== 'undefined' ? __dirname : path.resolve();
 const whiteList = ['http://localhost:8080'];
 
 var corsOptions = {
@@ -42,7 +42,7 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(
       '/images',
-      express.static(path.join(__dirname, 'uploads', 'images')),
+      express.static(path.join(dirname, 'uploads', 'images')),
     );
   }
 
