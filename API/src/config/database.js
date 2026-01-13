@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 export default {
   dialect: 'postgres',
@@ -12,8 +12,8 @@ export default {
     timestamps: true,
     underscored: true,
     underscoredAll: true,
-    'createdAt': 'created_at',
-    'updatedAt': 'updated_at',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   },
   dialectOptions: {
     timezone: 'America/Sao_Paulo',
