@@ -1,16 +1,18 @@
 services:
   db:
-    image: postgres:15
+    image: postgres:17
     container_name: postgres_container
     restart: always
     environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: projeto_escola
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - postgres_api_network
 
   backend:
     image: api_image
@@ -20,9 +22,11 @@ services:
     env_file:
       - .env
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - db
+    networks:
+      - postgres_api_network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -32,6 +36,14 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "5050:80"
+      - '5050:80'
+    networks:
+      - postgres_api_network
+
 volumes:
   pgdata:
+
+networks:
+  postgres_api_network:
+    name: postgres_api_network
+    driver: bridge
